@@ -84,4 +84,11 @@ public class AddressBook {
 					break;
 		}
 	}
+	
+	public void deleteContact() {
+		System.out.println("Enter First Name of Contact to be deleted");
+		String toBeDeletedName=sc.next();
+		ContactBook.remove(toBeDeletedName);
+		System.out.println("Contact deleted");
+	}
 }
