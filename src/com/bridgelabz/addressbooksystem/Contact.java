@@ -7,6 +7,7 @@ public class Contact {
 	private String lastName;
 	private String address;
 	private String city;
+	private String state;
 	private int zipCode;
 	private int phoneNumber;
 	private String emailId;
@@ -41,6 +42,12 @@ public class Contact {
 	}
 	public String getCity() {
 		return city;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getState() {
+		return state;
 	}
 	public void setCity(String city) {
 		this.city = city;
