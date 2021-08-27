@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class AddressBook {
 	Scanner sc=new Scanner(System.in);
 	Contact[] addressBook;
+	String name;
 	int index;
-	AddressBook(){
+	AddressBook(String name){
 		this.addressBook=new Contact[5];
 		this.index=0;
+		this.name=name;
 	}
 	
 	public void addContact() {
