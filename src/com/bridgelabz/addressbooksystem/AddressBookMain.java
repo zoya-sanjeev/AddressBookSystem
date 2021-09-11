@@ -26,7 +26,7 @@ public class AddressBookMain {
 						break;
 				
 				case 2:	System.out.println("Enter name of address book to be edited");
-						String addressBookName=sc.nextLine();
+						String addressBookName=sc.next();
 						AddressBook addressBookToBeEdited=addressBookArray.getAddressBook(addressBookName);
 						while(true) {
 							System.out.println("1.Add Contact\n2.Edit Contact\n3.Delete Contact\n4.Exit\nSelect option");
