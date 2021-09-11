@@ -15,7 +15,7 @@ public class AddressBookMain {
 		
 		
 		while(true) {
-			System.out.println("1.Add new Address Book\n2.Edit Existing\n3.Search in City\n4.Exit");
+			System.out.println("1.Add new Address Book\n2.Edit Existing\n3.Search in City\n4.Search in State\n5.Exit");
 			int option=sc.nextInt();
 			contactMenu:
 			switch(option) {
@@ -49,7 +49,12 @@ public class AddressBookMain {
 						String cityName=sc.next();
 						addressBookArray.searchAcrossCity(cityName);
 						break;
-				case 4: System.exit(0);
+				
+				case 4: System.out.println("Enter name of state");
+						String stateName=sc.next();
+						addressBookArray.searchAcrossState(stateName);
+						break;
+				case 5: System.exit(0);
 		
 			
 			}
