@@ -25,22 +25,19 @@ public class AddressBookMain {
 						addressBookArray.addAddressBook(name);
 						break;
 				
-				case 2:	System.out.println("Enter index on address book to be edited");
-						for(int i=0;i<addressBookArray.indexOfAdressBook;i++) {
-							System.out.println(i+": "+addressBookArray.getAddressBook(i).name);
-						}
-						int indexOfAddressBook=sc.nextInt();
-						
+				case 2:	System.out.println("Enter name of address book to be edited");
+						String addressBookName=sc.nextLine();
+						AddressBook addressBookToBeEdited=addressBookArray.getAddressBook(addressBookName);
 						while(true) {
 							System.out.println("1.Add Contact\n2.Edit Contact\n3.Delete Contact\n4.Exit\nSelect option");
 							int choice=sc.nextInt();
 							switch(choice) {
 
-							case 1: addressBookArray.getAddressBook(indexOfAddressBook).addContact();
+							case 1: addressBookToBeEdited.addContact();
 									break;
-							case 2: addressBookArray.getAddressBook(indexOfAddressBook).editContact();
+							case 2: addressBookToBeEdited.editContact();
 									break;
-							case 3: addressBookArray.getAddressBook(indexOfAddressBook).deleteContact();
+							case 3: addressBookToBeEdited.deleteContact();
 									break;
 							case 4: System.exit(0);
 				

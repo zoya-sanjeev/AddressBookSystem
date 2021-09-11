@@ -6,7 +6,7 @@ public class AddressBookArray {
 	
 	HashMap<String, AddressBook> addressBookArray;
 	
-	public AddressBookArray(String name) {
+	public AddressBookArray() {
 		this.addressBookArray=new HashMap<>();
 	}
 	
