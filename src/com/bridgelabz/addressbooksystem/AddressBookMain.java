@@ -15,9 +15,9 @@ public class AddressBookMain {
 		
 		
 		while(true) {
-			System.out.println("1.Add new Address Book\n2.Edit Existing\n3. Exit");
+			System.out.println("1.Add new Address Book\n2.Edit Existing\n3.Search in City\n4.Exit");
 			int option=sc.nextInt();
-			
+			contactMenu:
 			switch(option) {
 			
 				case 1: System.out.println("Enter name of Address Book");
@@ -39,12 +39,17 @@ public class AddressBookMain {
 									break;
 							case 3: addressBookToBeEdited.deleteContact();
 									break;
-							case 4: System.exit(0);
+							case 4: break contactMenu;
 				
 			
 							}
 						}
-				case 3: System.exit(0);
+						
+				case 3: System.out.println("Enter name of city");
+						String cityName=sc.next();
+						addressBookArray.searchAcrossCity(cityName);
+						break;
+				case 4: System.exit(0);
 		
 			
 			}
