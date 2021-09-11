@@ -95,4 +95,13 @@ public class AddressBook {
 		addressBook.remove(nameToBeDeleted);
 		System.out.println("Contact deleted");
 	}
+
+	public void findContactInCity(String cityName) {
+		for(Contact contact: addressBook.values()) {
+			if(contact.getCity().equals(cityName)) {
+				System.out.println(contact.getFirstName()+":"+cityName);
+			}
+		}
+		
+	}
 }

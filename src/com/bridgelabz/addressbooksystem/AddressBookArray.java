@@ -1,6 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class AddressBookArray {
 	
@@ -18,6 +18,12 @@ public class AddressBookArray {
 	
 	public AddressBook getAddressBook(String name) {
 		return addressBookArray.get(name);
+	}
+	
+	public void searchAcrossCity(String cityName) {
+		for(AddressBook addressBook : addressBookArray.values()) {
+			addressBook.findContactInCity(cityName);
+		}
 	}
 	
 
