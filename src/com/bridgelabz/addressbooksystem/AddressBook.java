@@ -98,8 +98,16 @@ public class AddressBook {
 
 	public void findContactInCity(String cityName) {
 		for(Contact contact: addressBook.values()) {
-			if(contact.getCity().equals(cityName)) {
+			if(contact.getCity().equalsIgnoreCase(cityName)) {
 				System.out.println(contact.getFirstName()+":"+cityName);
+			}
+		}
+		
+	}
+	public void findContactInState(String stateName) {
+		for(Contact contact: addressBook.values()) {
+			if(contact.getState().equalsIgnoreCase(stateName)) {
+				System.out.println(contact.getFirstName()+":"+stateName);
 			}
 		}
 		

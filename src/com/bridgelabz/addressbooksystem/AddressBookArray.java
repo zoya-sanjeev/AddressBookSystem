@@ -25,6 +25,11 @@ public class AddressBookArray {
 			addressBook.findContactInCity(cityName);
 		}
 	}
+	public void searchAcrossState(String stateName) {
+		for(AddressBook addressBook : addressBookArray.values()) {
+			addressBook.findContactInCity(stateName);
+		}
+	}
 	
 
 }
