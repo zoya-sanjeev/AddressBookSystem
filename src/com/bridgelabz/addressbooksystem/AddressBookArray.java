@@ -1,24 +1,23 @@
 package com.bridgelabz.addressbooksystem;
+
+import java.util.HashMap;
+
 public class AddressBookArray {
 	
-	AddressBook[] addressBookArray;
-	int indexOfAdressBook;
+	HashMap<String, AddressBook> addressBookArray;
 	
-	public AddressBookArray() {
-		addressBookArray=new AddressBook[3];
-		this.indexOfAdressBook=0;
+	public AddressBookArray(String name) {
+		this.addressBookArray=new HashMap<>();
 	}
 	
 	public void addAddressBook(String name) {
-		
-		
 		AddressBook newAddressBook=new AddressBook(name);
-		addressBookArray[this.indexOfAdressBook++]=newAddressBook;
+		addressBookArray.put(name, newAddressBook);
 		
 	}
 	
-	public AddressBook getAddressBook(int index) {
-		return addressBookArray[index];
+	public AddressBook getAddressBook(String name) {
+		return addressBookArray.get(name);
 	}
 	
 
