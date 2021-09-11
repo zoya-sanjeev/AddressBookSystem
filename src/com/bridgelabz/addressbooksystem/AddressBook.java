@@ -29,7 +29,10 @@ public class AddressBook {
 		String email = sc.next();
 		
 		Contact newContact=new Contact(firstName,lastName,city,state,zip,phoneNumber,email);
-		addressBook.put(firstName,newContact);
+		if(this.addressBook.get(firstName)==null)
+			addressBook.put(firstName,newContact);
+		else
+			System.out.println("This contact already exists");
 		
 	}
 	
