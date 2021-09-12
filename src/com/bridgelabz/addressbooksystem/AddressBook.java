@@ -96,18 +96,18 @@ public class AddressBook {
 		System.out.println("Contact deleted");
 	}
 
-	public void findContactInCity(String cityName) {
+	public void findContactInCity(String name, String cityName) {
 		for(Contact contact: addressBook.values()) {
-			if(contact.getCity().equalsIgnoreCase(cityName)) {
-				System.out.println(contact.getFirstName()+":"+cityName);
+			if(contact.getCity().equalsIgnoreCase(cityName) && contact.getFirstName().equalsIgnoreCase(name)) {
+				System.out.println(contact.getFirstName()+":"+cityName+" found");
 			}
 		}
 		
 	}
-	public void findContactInState(String stateName) {
+	public void findContactInState(String name, String stateName) {
 		for(Contact contact: addressBook.values()) {
-			if(contact.getState().equalsIgnoreCase(stateName)) {
-				System.out.println(contact.getFirstName()+":"+stateName);
+			if(contact.getState().equalsIgnoreCase(stateName)&& contact.getFirstName().equalsIgnoreCase(name)) {
+				System.out.println(contact.getFirstName()+":"+stateName +" found");
 			}
 		}
 		

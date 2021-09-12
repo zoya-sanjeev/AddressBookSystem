@@ -20,14 +20,14 @@ public class AddressBookArray {
 		return addressBookArray.get(name);
 	}
 	
-	public void searchAcrossCity(String cityName) {
+	public void searchAcrossCity(String name,String cityName) {
 		for(AddressBook addressBook : addressBookArray.values()) {
-			addressBook.findContactInCity(cityName);
+			addressBook.findContactInCity(name,cityName);
 		}
 	}
-	public void searchAcrossState(String stateName) {
+	public void searchAcrossState(String name, String stateName) {
 		for(AddressBook addressBook : addressBookArray.values()) {
-			addressBook.findContactInCity(stateName);
+			addressBook.findContactInCity(name, stateName);
 		}
 	}
 	

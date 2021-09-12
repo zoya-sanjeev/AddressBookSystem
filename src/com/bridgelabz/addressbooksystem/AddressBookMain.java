@@ -45,14 +45,18 @@ public class AddressBookMain {
 							}
 						}
 						
-				case 3: System.out.println("Enter name of city");
+				case 3: System.out.println("Enter name of person");
+						String searchNameInCity=sc.next();
+						System.out.println("Enter name of city");
 						String cityName=sc.next();
-						addressBookArray.searchAcrossCity(cityName);
+						addressBookArray.searchAcrossCity(searchNameInCity,cityName);
 						break;
 				
-				case 4: System.out.println("Enter name of state");
+				case 4: System.out.println("Enter name of person");
+						String searchNameInState=sc.next();
+						System.out.println("Enter name of state");
 						String stateName=sc.next();
-						addressBookArray.searchAcrossState(stateName);
+						addressBookArray.searchAcrossState(searchNameInState,stateName);
 						break;
 				case 5: System.exit(0);
 		
