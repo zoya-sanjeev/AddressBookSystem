@@ -15,7 +15,7 @@ public class AddressBookMain {
 		
 		
 		while(true) {
-			System.out.println("1.Add new Address Book\n2.Edit Existing\n3.Search in City\n4.Search in State\n5.Exit");
+			System.out.println("1.Add new Address Book\n2.Edit Existing\n3.Search in City\n4.Search in State\n5.Display Contacts in city\n6.Display Contacts in state\n7.Exit");
 			int option=sc.nextInt();
 			contactMenu:
 			switch(option) {
@@ -58,7 +58,14 @@ public class AddressBookMain {
 						String stateName=sc.next();
 						addressBookArray.searchAcrossState(searchNameInState,stateName);
 						break;
-				case 5: System.exit(0);
+				
+				case 5: addressBookArray.viewContactsInCity();
+						break;
+				
+				case 6: addressBookArray.viewContactsInState();
+						break;
+						
+				case 7: System.exit(0);
 		
 			
 			}

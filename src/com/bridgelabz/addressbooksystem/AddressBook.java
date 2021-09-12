@@ -5,6 +5,8 @@ import java.util.*;
 public class AddressBook {
 	Scanner sc=new Scanner(System.in);
 	HashMap<String,Contact> addressBook;
+	public static HashMap<String, ArrayList<String>> contactsInCities=new HashMap<>();
+	public static HashMap<String, ArrayList<String>> contactsInStates=new HashMap<>();
 	String name;
 	AddressBook(String name){
 		this.addressBook=new HashMap<>();
@@ -29,8 +31,28 @@ public class AddressBook {
 		String email = sc.next();
 		
 		Contact newContact=new Contact(firstName,lastName,city,state,zip,phoneNumber,email);
-		if(this.addressBook.get(firstName)==null)
+		if(this.addressBook.get(firstName)==null) {
 			addressBook.put(firstName,newContact);
+			if(contactsInCities.containsKey(city)) {
+				ArrayList<String> names=contactsInCities.get(city);
+				names.add(firstName);
+				contactsInCities.replace(city, names);
+			}else {
+				ArrayList<String> names=new ArrayList<>();
+				names.add(firstName);
+				contactsInCities.put(city, names);
+			}
+			
+			if(contactsInStates.containsKey(state)) {
+				ArrayList<String> names=contactsInCities.get(state);
+				names.add(firstName);
+				contactsInStates.replace(state, names);
+			}else {
+				ArrayList<String> names=new ArrayList<>();
+				names.add(firstName);
+				contactsInStates.put(state, names);
+			}
+		}
 		else
 			System.out.println("This contact already exists");
 		
