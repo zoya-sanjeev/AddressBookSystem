@@ -43,6 +43,18 @@ public class AddressBookArray {
 			System.out.println(AddressBook.contactsInCities.get(state));
 		}
 	}
+	public void numberOfContactsInCity() {
+		for(String city: AddressBook.contactsInCities.keySet()) {
+			System.out.println(city+":");
+			System.out.print(AddressBook.contactsInCities.get(city).size());
+		}
+	}
+	public void numberOfContactsInState() {
+		for(String state: AddressBook.contactsInStates.keySet()) {
+			System.out.println(state+":");
+			System.out.print(AddressBook.contactsInCities.get(state).size());
+		}
+	}
 	
 
 }
