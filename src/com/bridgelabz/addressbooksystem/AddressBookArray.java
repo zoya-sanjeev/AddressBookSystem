@@ -31,5 +31,18 @@ public class AddressBookArray {
 		}
 	}
 	
+	public void viewContactsInCity() {
+		for(String city: AddressBook.contactsInCities.keySet()) {
+			System.out.println(city);
+			System.out.println(AddressBook.contactsInCities.get(city));
+		}
+	}
+	public void viewContactsInState() {
+		for(String state: AddressBook.contactsInStates.keySet()) {
+			System.out.println(state);
+			System.out.println(AddressBook.contactsInCities.get(state));
+		}
+	}
+	
 
 }
