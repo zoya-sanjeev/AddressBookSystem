@@ -161,12 +161,17 @@ public class AddressBook {
 	public void sortByCity() {
 		addressBook.stream()
 		.sorted((contact1, contact2) -> contact1.getCity().compareTo(contact2.getCity()))
-		.forEach(contact -> System.out.print(contact.getCity()+" "));
+		.forEach(contact -> System.out.print(contact.getFirstName()+":"+contact.getCity()+" "));
 	}
 	
 	public void sortByState() {
 		addressBook.stream()
 		.sorted((contact1, contact2) -> contact1.getState().compareTo(contact2.getState()))
-		.forEach(contact -> System.out.print(contact.getState()+" "));
+		.forEach(contact -> System.out.print(contact.getFirstName()+":"+contact.getState()+" "));
+	}
+	public void sortByZip() {
+		addressBook.stream()
+		.sorted((contact1, contact2) -> String.valueOf(contact1.getZipCode()).compareTo(String.valueOf(contact2.getZipCode())))
+		.forEach(contact -> System.out.print(contact.getFirstName()+":"+contact.getZipCode()+" "));
 	}
 }
