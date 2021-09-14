@@ -163,4 +163,10 @@ public class AddressBook {
 		.sorted((contact1, contact2) -> contact1.getCity().compareTo(contact2.getCity()))
 		.forEach(contact -> System.out.print(contact.getCity()+" "));
 	}
+	
+	public void sortByState() {
+		addressBook.stream()
+		.sorted((contact1, contact2) -> contact1.getState().compareTo(contact2.getState()))
+		.forEach(contact -> System.out.print(contact.getState()+" "));
+	}
 }
