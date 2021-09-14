@@ -49,13 +49,17 @@ public class AddressBookArray {
 	public void numberOfContactsInCity() {
 		for(String city: AddressBook.contactsInCities.keySet()) {
 			System.out.println(city+":");
-			System.out.print(AddressBook.contactsInCities.get(city).size());
+			List<String> contacts=AddressBook.contactsInStates.get(city);
+			long count=contacts.stream().count();
+			System.out.print(count);
 		}
 	}
 	public void numberOfContactsInState() {
 		for(String state: AddressBook.contactsInStates.keySet()) {
 			System.out.println(state+":");
-			System.out.print(AddressBook.contactsInCities.get(state).size());
+			List<String> contacts=AddressBook.contactsInStates.get(state);
+			long count=contacts.stream().count();
+			System.out.print(count);
 		}
 	}
 	
