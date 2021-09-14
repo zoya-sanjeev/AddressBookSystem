@@ -4,12 +4,12 @@ import java.util.*;
 
 public class AddressBook {
 	Scanner sc=new Scanner(System.in);
-	HashMap<String,Contact> addressBook;
+	LinkedList<Contact> addressBook;
 	public static HashMap<String, ArrayList<String>> contactsInCities=new HashMap<>();
 	public static HashMap<String, ArrayList<String>> contactsInStates=new HashMap<>();
 	String name;
 	AddressBook(String name){
-		this.addressBook=new HashMap<>();
+		this.addressBook=new LinkedList<>();
 		this.name=name;
 	}
 	
@@ -32,7 +32,7 @@ public class AddressBook {
 		
 		Contact newContact=new Contact(firstName,lastName,city,state,zip,phoneNumber,email);
 		if(this.addressBook.get(firstName)==null) {
-			addressBook.put(firstName,newContact);
+			addressBook.add(newContact);
 			if(contactsInCities.containsKey(city)) {
 				ArrayList<String> names=contactsInCities.get(city);
 				names.add(firstName);
