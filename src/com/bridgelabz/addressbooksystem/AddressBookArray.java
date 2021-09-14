@@ -12,7 +12,7 @@ public class AddressBookArray {
 	
 	public void addAddressBook(String name) {
 		AddressBook newAddressBook=new AddressBook(name);
-		addressBookArray.put(name, newAddressBook);
+		addressBookArray.put(name, newAddressBook);	
 		
 	}
 	
@@ -34,13 +34,16 @@ public class AddressBookArray {
 	public void viewContactsInCity() {
 		for(String city: AddressBook.contactsInCities.keySet()) {
 			System.out.println(city);
-			System.out.println(AddressBook.contactsInCities.get(city));
+			List<String> contacts=AddressBook.contactsInCities.get(city);
+			contacts.stream().forEach(contactName -> System.out.print(contactName+" "));
 		}
 	}
 	public void viewContactsInState() {
+		
 		for(String state: AddressBook.contactsInStates.keySet()) {
 			System.out.println(state);
-			System.out.println(AddressBook.contactsInCities.get(state));
+			List<String> contacts=AddressBook.contactsInStates.get(state);
+			contacts.stream().forEach(contactName -> System.out.print(contactName+" "));
 		}
 	}
 	public void numberOfContactsInCity() {
