@@ -1,6 +1,8 @@
 package com.bridgelabz.addressbooksystem;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class AddressBook {
 	Scanner sc=new Scanner(System.in);
@@ -12,6 +14,7 @@ public class AddressBook {
 		this.addressBook=new LinkedList<>();
 		this.name=name;
 	}
+	
 	
 	public void addContact() {
 		System.out.println("Add Contact");
@@ -31,7 +34,12 @@ public class AddressBook {
 		String email = sc.next();
 		
 		Contact newContact=new Contact(firstName,lastName,city,state,zip,phoneNumber,email);
-		if(!this.addressBook.contains(newContact)) {
+		
+		Contact checkDuplicate=addressBook.stream()
+								.filter(contact -> contact.getFirstName().equalsIgnoreCase(firstName))
+								.findFirst().orElse(null);
+		
+		if(checkDuplicate==null) {
 			addressBook.add(newContact);
 			if(contactsInCities.containsKey(city)) {
 				ArrayList<String> names=contactsInCities.get(city);
