@@ -31,7 +31,7 @@ public class AddressBook {
 		String email = sc.next();
 		
 		Contact newContact=new Contact(firstName,lastName,city,state,zip,phoneNumber,email);
-		if(this.addressBook.get(firstName)==null) {
+		if(!this.addressBook.contains(newContact)) {
 			addressBook.add(newContact);
 			if(contactsInCities.containsKey(city)) {
 				ArrayList<String> names=contactsInCities.get(city);
@@ -64,44 +64,42 @@ public class AddressBook {
 		int choice=sc.nextInt();
 		System.out.println("Enter First name of contact to be edited");
 		String nameToBeEdited=sc.nextLine();
-		Contact contactToBeEdited=addressBook.get(nameToBeEdited);
+		Contact contactToBeEdited=null;
+		for(Contact contact : addressBook) {
+			if(contact.getFirstName().equals(contactToBeEdited)) {
+				contactToBeEdited=contact;
+				break;
+			}
+		}
 		if(contactToBeEdited!=null) {
 			switch(choice) {
 				case 1: System.out.println("Enter new First Name");
 						String newFName=sc.next();
 						contactToBeEdited.setFirstName(newFName);
-						addressBook.remove(nameToBeEdited);
-						addressBook.put(newFName, contactToBeEdited);
 						break;
 				case 2: System.out.println("Enter new Last Name");
 						String newLName=sc.next();
 						contactToBeEdited.setLastName(newLName);
-						addressBook.replace(nameToBeEdited, contactToBeEdited);
 						break;
 				case 3: System.out.println("Enter new City");
 						String newCity=sc.next();
 						contactToBeEdited.setCity(newCity);
-						addressBook.replace(nameToBeEdited, contactToBeEdited);
 						break;
 				case 4: System.out.println("Enter new State");
 						String newState=sc.next();
 						contactToBeEdited.setState(newState);
-						addressBook.replace(nameToBeEdited, contactToBeEdited);
 						break;
 				case 5: System.out.println("Enter new Zip Code");
 						int newZip=sc.nextInt();
 						contactToBeEdited.setZipCode(newZip);
-						addressBook.replace(nameToBeEdited, contactToBeEdited);
 						break;
 				case 6: System.out.println("Enter new Phone Number");
 						int newPNumber=sc.nextInt();
 						contactToBeEdited.setPhoneNumber(newPNumber);
-						addressBook.replace(nameToBeEdited, contactToBeEdited);
 						break;
 				case 7: System.out.println("Enter new Email");
 						String newEmail=sc.next();
 						contactToBeEdited.setEmailId(newEmail);
-						addressBook.replace(nameToBeEdited, contactToBeEdited);
 						break;
 			}
 			System.out.println("Contact edited");
@@ -114,12 +112,17 @@ public class AddressBook {
 	public void deleteContact() {
 		System.out.println("Enter first name of contact to be deleted");
 		String nameToBeDeleted=sc.nextLine();
-		addressBook.remove(nameToBeDeleted);
+		for(Contact contact : addressBook) {
+			if(contact.getFirstName().equals(nameToBeDeleted)) {
+				addressBook.remove(contact);
+				break;
+			}
+		}
 		System.out.println("Contact deleted");
 	}
 
 	public void findContactInCity(String name, String cityName) {
-		for(Contact contact: addressBook.values()) {
+		for(Contact contact: addressBook) {
 			if(contact.getCity().equalsIgnoreCase(cityName) && contact.getFirstName().equalsIgnoreCase(name)) {
 				System.out.println(contact.getFirstName()+":"+cityName+" found");
 			}
@@ -127,7 +130,7 @@ public class AddressBook {
 		
 	}
 	public void findContactInState(String name, String stateName) {
-		for(Contact contact: addressBook.values()) {
+		for(Contact contact: addressBook) {
 			if(contact.getState().equalsIgnoreCase(stateName)&& contact.getFirstName().equalsIgnoreCase(name)) {
 				System.out.println(contact.getFirstName()+":"+stateName +" found");
 			}
