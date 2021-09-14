@@ -130,19 +130,25 @@ public class AddressBook {
 	}
 
 	public void findContactInCity(String name, String cityName) {
-		for(Contact contact: addressBook) {
-			if(contact.getCity().equalsIgnoreCase(cityName) && contact.getFirstName().equalsIgnoreCase(name)) {
-				System.out.println(contact.getFirstName()+":"+cityName+" found");
-			}
-		}
+		Contact searchContact=addressBook.stream()
+							.filter(contact -> contact.getFirstName().equals(name) && contact.getCity().equals(cityName))
+							.findFirst().orElse(null);
+		
+		if(searchContact!=null)
+			System.out.println("Contact found");
+		else
+			System.out.println("Contact not found");
 		
 	}
 	public void findContactInState(String name, String stateName) {
-		for(Contact contact: addressBook) {
-			if(contact.getState().equalsIgnoreCase(stateName)&& contact.getFirstName().equalsIgnoreCase(name)) {
-				System.out.println(contact.getFirstName()+":"+stateName +" found");
-			}
-		}
+		Contact searchContact=addressBook.stream()
+				.filter(contact -> contact.getFirstName().equals(name) && contact.getState().equals(stateName))
+				.findFirst().orElse(null);
+
+			if(searchContact!=null)
+				System.out.println("Contact found");
+			else
+				System.out.println("Contact not found");
 		
 	}
 }
