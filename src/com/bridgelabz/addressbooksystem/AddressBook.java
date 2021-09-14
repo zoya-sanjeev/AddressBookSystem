@@ -151,4 +151,10 @@ public class AddressBook {
 				System.out.println("Contact not found");
 		
 	}
+	
+	public void sortAddressBook() {
+		addressBook.stream()
+					.sorted((contact1, contact2) -> contact1.getFirstName().compareTo(contact2.getFirstName()))
+					.forEach(contact -> System.out.print(contact.getFirstName()+" "));
+	}
 }
