@@ -157,4 +157,10 @@ public class AddressBook {
 					.sorted((contact1, contact2) -> contact1.getFirstName().compareTo(contact2.getFirstName()))
 					.forEach(contact -> System.out.print(contact.getFirstName()+" "));
 	}
+	
+	public void sortByCity() {
+		addressBook.stream()
+		.sorted((contact1, contact2) -> contact1.getCity().compareTo(contact2.getCity()))
+		.forEach(contact -> System.out.print(contact.getCity()+" "));
+	}
 }
