@@ -13,14 +13,13 @@ public class AddressBook {
 	LinkedList<Contact> addressBook;
 	public static HashMap<String, ArrayList<String>> contactsInCities=new HashMap<>();
 	public static HashMap<String, ArrayList<String>> contactsInStates=new HashMap<>();
-	public static String ADDRESSBOOK_FILE_NAME="addressbook-file.txt";
 	String name;
 	AddressBook(String name){
 		this.addressBook=new LinkedList<>();
 		this.name=name;
 	}
 	
-	public void writeToFile() {
+	public void writeToFile(String name) {
 		StringBuffer contactBuffer = new StringBuffer();
 		addressBook.forEach(contact -> {
 			String contactString = contact.toString().concat("\n");
@@ -28,16 +27,16 @@ public class AddressBook {
 		});
 		
 		try {
-			Files.write(Paths.get(ADDRESSBOOK_FILE_NAME),contactBuffer.toString().getBytes());
+			Files.write(Paths.get(name),contactBuffer.toString().getBytes());
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void readFromFile(){
+	public void readFromFile(String name){
 		List<Contact> listOfContacts=new ArrayList<Contact>();
 		try {
-			Files.lines(new File(ADDRESSBOOK_FILE_NAME).toPath())
+			Files.lines(new File(name).toPath())
 			.map(line-> line.trim())
 			.forEach(line -> System.out.println(line));
 			System.out.println(listOfContacts);

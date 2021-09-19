@@ -15,7 +15,7 @@ public class AddressBookMain {
 		
 		
 		while(true) {
-			System.out.println("1.Add new Address Book\n2.Edit Existing\n3.Search in City\n4.Search in State\n5.Display Contacts in city\n6.Display Contacts in state\n7.Display Number of Contacts in Cities\n8.Display number of Contacts in States\n9.Exit");
+			System.out.println("1.Add new Address Book\n2.Edit Existing\n3.Search in City\n4.Search in State\n5.Display Contacts in city\n6.Display Contacts in state\n7.Display Number of Contacts in Cities\n8.Display number of Contacts in States\n9.Write to File\n10.Read From File\n11.Exit");
 			int option=sc.nextInt();
 			contactMenu:
 			switch(option) {
@@ -70,8 +70,20 @@ public class AddressBookMain {
 				
 				case 8: addressBookArray.numberOfContactsInState();
 						break;
-						
-				case 9: System.exit(0);
+				
+				case 9: System.out.println("Enter name of AddressBook to be written to file");
+						String nameOfAddressBook=sc.next();
+						AddressBook addressBook=addressBookArray.getAddressBook(nameOfAddressBook);
+						addressBook.writeToFile(nameOfAddressBook+".txt");
+						break;
+				
+				case 10: System.out.println("Enter name of AddressBook to be read from file");
+						String nameOfAddressBookRead=sc.next();
+						AddressBook addressBookRead=addressBookArray.getAddressBook(nameOfAddressBookRead);
+						addressBookRead.writeToFile(nameOfAddressBookRead+".txt");
+						break;
+				
+				case 11: System.exit(0);
 		
 			
 			}
