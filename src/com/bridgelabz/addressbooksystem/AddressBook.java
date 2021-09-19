@@ -36,7 +36,7 @@ public class AddressBook {
 	public void readFromFile(String name){
 		List<Contact> listOfContacts=new ArrayList<Contact>();
 		try {
-			Files.lines(new File(name).toPath())
+			Files.lines(new File(name+".txt").toPath())
 			.map(line-> line.trim())
 			.forEach(line -> System.out.println(line));
 			System.out.println(listOfContacts);

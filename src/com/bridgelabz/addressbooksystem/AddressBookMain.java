@@ -80,7 +80,7 @@ public class AddressBookMain {
 				case 10: System.out.println("Enter name of AddressBook to be read from file");
 						String nameOfAddressBookRead=sc.next();
 						AddressBook addressBookRead=addressBookArray.getAddressBook(nameOfAddressBookRead);
-						addressBookRead.writeToFile(nameOfAddressBookRead+".txt");
+						addressBookRead.readFromFile(nameOfAddressBookRead);
 						break;
 				
 				case 11: System.exit(0);
