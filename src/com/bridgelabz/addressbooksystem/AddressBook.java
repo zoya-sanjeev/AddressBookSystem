@@ -1,5 +1,8 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -15,6 +18,19 @@ public class AddressBook {
 		this.name=name;
 	}
 	
+	public void writeToFile(String fileName) {
+		StringBuffer contactBuffer = new StringBuffer();
+		addressBook.forEach(contact -> {
+			String contactString = contact.toString().concat("\n");
+			contactBuffer.append(contactString);
+		});
+		
+		try {
+			Files.write(Paths.get(fileName),contactBuffer.toString().getBytes());
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void addContact() {
 		System.out.println("Add Contact");
