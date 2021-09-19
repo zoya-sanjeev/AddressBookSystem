@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,13 +13,14 @@ public class AddressBook {
 	LinkedList<Contact> addressBook;
 	public static HashMap<String, ArrayList<String>> contactsInCities=new HashMap<>();
 	public static HashMap<String, ArrayList<String>> contactsInStates=new HashMap<>();
+	public static String ADDRESSBOOK_FILE_NAME="addressbook-file.txt";
 	String name;
 	AddressBook(String name){
 		this.addressBook=new LinkedList<>();
 		this.name=name;
 	}
 	
-	public void writeToFile(String fileName) {
+	public void writeToFile() {
 		StringBuffer contactBuffer = new StringBuffer();
 		addressBook.forEach(contact -> {
 			String contactString = contact.toString().concat("\n");
@@ -26,10 +28,23 @@ public class AddressBook {
 		});
 		
 		try {
-			Files.write(Paths.get(fileName),contactBuffer.toString().getBytes());
+			Files.write(Paths.get(ADDRESSBOOK_FILE_NAME),contactBuffer.toString().getBytes());
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void readFromFile(){
+		List<Contact> listOfContacts=new ArrayList<Contact>();
+		try {
+			Files.lines(new File(ADDRESSBOOK_FILE_NAME).toPath())
+			.map(line-> line.trim())
+			.forEach(line -> System.out.println(line));
+			System.out.println(listOfContacts);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	
 	}
 	
 	public void addContact() {
