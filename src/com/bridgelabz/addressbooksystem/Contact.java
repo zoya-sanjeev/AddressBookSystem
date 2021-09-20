@@ -72,8 +72,17 @@ public class Contact {
 	}
 	
 	@Override 
-	public String toString(){
-		return firstName+", "+lastName+", "+city+", "+state+", "+zipCode+", "+phoneNumber+", "+emailId;
-	}
+	public String toString () {
+        return "Contact{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zipCode +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + emailId + '\'' +
+                '}';
+    }
 
 }
