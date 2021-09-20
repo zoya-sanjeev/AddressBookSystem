@@ -1,15 +1,24 @@
 package com.bridgelabz.addressbooksystem;
 
+import com.opencsv.bean.CsvBindByName;
+
 public class Contact {
 	
-	
+	@CsvBindByName
 	private String firstName;
+	@CsvBindByName
 	private String lastName;
+	@CsvBindByName
 	private String address;
+	@CsvBindByName
 	private String city;
+	@CsvBindByName
 	private String state;
+	@CsvBindByName
 	private int zipCode;
+	@CsvBindByName
 	private int phoneNumber;
+	@CsvBindByName
 	private String emailId;
 	
 	public Contact(String firstName,String lastName,String address,String city,int zipCode,int phoneNumber,String emailId){
