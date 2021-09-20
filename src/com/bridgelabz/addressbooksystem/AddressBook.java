@@ -1,6 +1,10 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -19,6 +23,8 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
 
 public class AddressBook {
 	Scanner sc=new Scanner(System.in);
@@ -62,10 +68,15 @@ public class AddressBook {
 				beanToCsv.write(addressBook);
 				
 			}
+		}else if(ioService==IOService.JSON_IO) {
+			Gson gson=new Gson();
+			String json=gson.toJson(addressBook);
+			FileWriter writer =new FileWriter(name);
+			writer.write(json);		
 		}
 	}
 	
-	public static void readData(String name, IOService ioService){
+	public static void readData(String name, IOService ioService) throws FileNotFoundException{
 		if(ioService==IOService.FILE_IO) {
 			List<Contact> listOfContacts=new ArrayList<Contact>();
 			try {
@@ -94,6 +105,12 @@ public class AddressBook {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
+		}else if(ioService==IOService.JSON_IO) {
+			Gson gson=new Gson();
+			BufferedReader br=new BufferedReader(new FileReader(name));
+			Contact[] contactsFile= gson.fromJson(br, Contact[].class);
+			List<Contact> addressbook=Arrays.asList(contactsFile);
+			System.out.println(addressbook);
 		}
 	}
 	

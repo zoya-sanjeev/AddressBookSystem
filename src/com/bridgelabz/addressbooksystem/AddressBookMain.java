@@ -81,13 +81,13 @@ public class AddressBookMain {
 				case 9: System.out.println("Enter name of AddressBook to be written to file");
 						String nameOfAddressBook=sc.next();
 						AddressBook addressBook=addressBookArray.getAddressBook(nameOfAddressBook);
-						addressBook.writeData(nameOfAddressBook+".csv",IOService.CSV_IO);
+						addressBook.writeData(nameOfAddressBook+".json",IOService.JSON_IO);
 						break;
 				
 				case 10: System.out.println("Enter name of AddressBook to be read from file");
 						String nameOfAddressBookRead=sc.next();
 						System.out.println(addressBookArray.getAddressBook(nameOfAddressBookRead));
-						AddressBook.readData(nameOfAddressBookRead, IOService.CSV_IO);
+						AddressBook.readData(nameOfAddressBookRead+".json", IOService.JSON_IO);
 						break;
 				
 				case 11: System.exit(0);
