@@ -2,9 +2,21 @@ package com.bridgelabz.addressbooksystem;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -24,30 +36,64 @@ public class AddressBook {
 		this.name=name;
 	}
 	
-	public void writeToFile(String name) {
-		StringBuffer contactBuffer = new StringBuffer();
-		addressBook.forEach(contact -> {
-			String contactString = contact.toString().concat("\n");
-			contactBuffer.append(contactString);
-		});
-		
-		try {
-			Files.write(Paths.get(name),contactBuffer.toString().getBytes());
-		} catch(IOException e) {
-			e.printStackTrace();
+	public void writeData(String name, IOService ioService) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		if(ioService==IOService.FILE_IO) {
+			StringBuffer contactBuffer = new StringBuffer();
+			addressBook.forEach(contact -> {
+				String contactString = contact.toString().concat("\n");
+				contactBuffer.append(contactString);
+			});
+			
+			try {
+				Files.write(Paths.get(name),contactBuffer.toString().getBytes());
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else if(ioService==IOService.CSV_IO) {
+			try(
+				Writer writer=Files.newBufferedWriter(Paths.get(name));
+			){
+				StatefulBeanToCsv<Contact> beanToCsv=new StatefulBeanToCsvBuilder(writer)
+															.withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+															.build();
+				List<Contact> addressbook=new ArrayList(addressBook);
+				beanToCsv.write(addressBook);
+				
+			}
 		}
 	}
 	
-	public void readFromFile(String name){
-		List<Contact> listOfContacts=new ArrayList<Contact>();
-		try {
-			Files.lines(new File("office.txt").toPath())
-			.map(line-> line.trim())
-			.forEach(line -> System.out.println(line));
-		}catch(IOException e) {
-			e.printStackTrace();
+	public static void readData(String name, IOService ioService){
+		if(ioService==IOService.FILE_IO) {
+			List<Contact> listOfContacts=new ArrayList<Contact>();
+			try {
+				Files.lines(new File("office.txt").toPath())
+				.map(line-> line.trim())
+				.forEach(line -> System.out.println(line));
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		}else if(ioService== IOService.CSV_IO) {
+			try {
+	            Reader reader = Files.newBufferedReader(Paths.get(name+".csv"));
+	            CSVReader csvReader = new CSVReader(reader);
+	            String[] nextRecord;
+	            System.out.println("Contact Details Are");
+	            while (((nextRecord = csvReader.readNext())) != null) {
+	                System.out.println("firstName : " + nextRecord[0]);
+	                System.out.println("lastName : " + nextRecord[1]);
+	                System.out.println("address : " + nextRecord[2]);
+	                System.out.println("city : " + nextRecord[3]);
+	                System.out.println("state : " + nextRecord[4]);
+	                System.out.println("zip : " + nextRecord[5]);
+	                System.out.println("phoneNumber : " + nextRecord[6]);
+	                System.out.println("email : " + nextRecord[7]);
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
 		}
-	
 	}
 	
 	public void addContact() {

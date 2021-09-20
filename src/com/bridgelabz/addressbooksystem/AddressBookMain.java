@@ -1,16 +1,23 @@
 package com.bridgelabz.addressbooksystem;
+import java.io.IOException;
 import java.util.Scanner;
+
+import javax.imageio.spi.IIOServiceProvider;
+
+import com.bridgelabz.addressbooksystem.AddressBook.IOService;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 public class AddressBookMain {
 	
 	static Scanner sc=new Scanner(System.in);
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
 		System.out.println("Welcome to Address Book");
 		getMenu();
 	}
 	
-	public static void getMenu() {
+	public static void getMenu() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
 		AddressBookArray addressBookArray=new AddressBookArray();
 		
 		
@@ -74,13 +81,13 @@ public class AddressBookMain {
 				case 9: System.out.println("Enter name of AddressBook to be written to file");
 						String nameOfAddressBook=sc.next();
 						AddressBook addressBook=addressBookArray.getAddressBook(nameOfAddressBook);
-						addressBook.writeToFile(nameOfAddressBook+".txt");
+						addressBook.writeData(nameOfAddressBook+".csv",IOService.CSV_IO);
 						break;
 				
 				case 10: System.out.println("Enter name of AddressBook to be read from file");
 						String nameOfAddressBookRead=sc.next();
-						AddressBook addressBookRead=addressBookArray.getAddressBook(nameOfAddressBookRead);
-						addressBookRead.readFromFile(nameOfAddressBookRead);
+						System.out.println(addressBookArray.getAddressBook(nameOfAddressBookRead));
+						AddressBook.readData(nameOfAddressBookRead, IOService.CSV_IO);
 						break;
 				
 				case 11: System.exit(0);
