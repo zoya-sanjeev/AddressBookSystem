@@ -29,7 +29,8 @@ public class AddressBook {
 	public enum IOService{
 		FILE_IO,
 		CONSOLE_IO,
-		CSV_IO
+		CSV_IO,
+		JSON_IO
 	}
 	AddressBook(String name){
 		this.addressBook=new LinkedList<>();
