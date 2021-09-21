@@ -73,6 +73,7 @@ public class AddressBook {
 			String json=gson.toJson(addressBook);
 			FileWriter writer =new FileWriter(name);
 			writer.write(json);		
+			writer.close();
 		}
 	}
 	
