@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
-public class AddressBook {
+public class AddressBook implements AddressBookIF{
 	Scanner sc=new Scanner(System.in);
 	public LinkedList<Contact> addressBook;
 	public static HashMap<String, ArrayList<String>> contactsInCities=new HashMap<>();
@@ -115,6 +115,7 @@ public class AddressBook {
 		}
 	}
 	
+	@Override
 	public Contact createContact() {
 		System.out.println("Add Contact");
 		System.out.println("Enter first name:");
@@ -139,6 +140,7 @@ public class AddressBook {
 		
 	}
 	
+	@Override
 	public void addContact(Contact newContact) {
 		
 		Contact checkDuplicate=addressBook.stream()
@@ -172,6 +174,7 @@ public class AddressBook {
 		
 	}
 	
+	@Override
 	public void editContact() {
 		System.out.println("Edit contact:");
 		System.out.println("Select Option:\n1.First Name\n2.Last Name\n3.City\n4.State\n5.Zip Code\n6.Phone\n7.Email");
@@ -223,6 +226,7 @@ public class AddressBook {
 		}
 	}
 	
+	@Override
 	public void deleteContact() {
 		System.out.println("Enter first name of contact to be deleted");
 		String nameToBeDeleted=sc.nextLine();
@@ -235,6 +239,7 @@ public class AddressBook {
 		System.out.println("Contact deleted");
 	}
 
+	@Override
 	public void findContactInCity(String name, String cityName) {
 		Contact searchContact=addressBook.stream()
 							.filter(contact -> contact.getFirstName().equals(name) && contact.getCity().equals(cityName))
@@ -246,6 +251,8 @@ public class AddressBook {
 			System.out.println("Contact not found");
 		
 	}
+	
+	@Override
 	public void findContactInState(String name, String stateName) {
 		Contact searchContact=addressBook.stream()
 				.filter(contact -> contact.getFirstName().equals(name) && contact.getState().equals(stateName))
@@ -258,30 +265,37 @@ public class AddressBook {
 		
 	}
 	
+	@Override
 	public void sortAddressBook() {
 		addressBook.stream()
 					.sorted((contact1, contact2) -> contact1.getFirstName().compareTo(contact2.getFirstName()))
 					.forEach(contact -> System.out.print(contact.getFirstName()+" "));
 	}
 	
+	@Override
 	public void sortByCity() {
 		addressBook.stream()
 		.sorted((contact1, contact2) -> contact1.getCity().compareTo(contact2.getCity()))
 		.forEach(contact -> System.out.print(contact.getFirstName()+":"+contact.getCity()+" "));
 	}
 	
+	@Override
 	public void sortByState() {
 		addressBook.stream()
 		.sorted((contact1, contact2) -> contact1.getState().compareTo(contact2.getState()))
 		.forEach(contact -> System.out.print(contact.getFirstName()+":"+contact.getState()+" "));
 	}
+	
+	@Override
 	public void sortByZip() {
 		addressBook.stream()
 		.sorted((contact1, contact2) -> String.valueOf(contact1.getZipCode()).compareTo(String.valueOf(contact2.getZipCode())))
 		.forEach(contact -> System.out.print(contact.getFirstName()+":"+contact.getZipCode()+" "));
 	}
 	
+	@Override
 	public int size() {
 		return addressBook.size();
 	}
+
 }
