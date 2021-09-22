@@ -1,4 +1,4 @@
-package com.bridgelabz.addressbooksystem;
+package main.com.bridgelabz.addressbooksystem;
 
 import java.util.*;
 

@@ -1,12 +1,13 @@
-package com.bridgelabz.addressbooksystem;
+package main.com.bridgelabz.addressbooksystem;
 import java.io.IOException;
 import java.util.Scanner;
 
 import javax.imageio.spi.IIOServiceProvider;
 
-import com.bridgelabz.addressbooksystem.AddressBook.IOService;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+import main.com.bridgelabz.addressbooksystem.AddressBook.IOService;
 
 public class AddressBookMain {
 	
@@ -40,7 +41,8 @@ public class AddressBookMain {
 							int choice=sc.nextInt();
 							switch(choice) {
 
-							case 1: addressBookToBeEdited.addContact();
+							case 1: Contact contactDetails=addressBookToBeEdited.createContact();
+									addressBookToBeEdited.addContact(contactDetails);
 									break;
 							case 2: addressBookToBeEdited.editContact();
 									break;

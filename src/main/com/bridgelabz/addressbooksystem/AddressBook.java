@@ -1,4 +1,4 @@
-package com.bridgelabz.addressbooksystem;
+package main.com.bridgelabz.addressbooksystem;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,7 +38,7 @@ public class AddressBook {
 		CSV_IO,
 		JSON_IO
 	}
-	AddressBook(String name){
+	public AddressBook(String name){
 		this.addressBook=new LinkedList<>();
 		this.name=name;
 	}
@@ -115,7 +115,7 @@ public class AddressBook {
 		}
 	}
 	
-	public void addContact() {
+	public Contact createContact() {
 		System.out.println("Add Contact");
 		System.out.println("Enter first name:");
 		String firstName = sc.next();
@@ -133,31 +133,36 @@ public class AddressBook {
 		String email = sc.next();
 		
 		Contact newContact=new Contact(firstName,lastName,city,state,zip,phoneNumber,email);
+		return newContact;
+		
+	}
+	
+	public void addContact(Contact newContact) {
 		
 		Contact checkDuplicate=addressBook.stream()
-								.filter(contact -> contact.getFirstName().equalsIgnoreCase(firstName))
+								.filter(contact -> contact.getFirstName().equalsIgnoreCase(newContact.getFirstName()))
 								.findFirst().orElse(null);
 		
 		if(checkDuplicate==null) {
 			addressBook.add(newContact);
-			if(contactsInCities.containsKey(city)) {
-				ArrayList<String> names=contactsInCities.get(city);
-				names.add(firstName);
-				contactsInCities.replace(city, names);
+			if(contactsInCities.containsKey(newContact.getCity())) {
+				ArrayList<String> names=contactsInCities.get(newContact.getCity());
+				names.add(newContact.getFirstName());
+				contactsInCities.replace(newContact.getCity(), names);
 			}else {
 				ArrayList<String> names=new ArrayList<>();
-				names.add(firstName);
-				contactsInCities.put(city, names);
+				names.add(newContact.getFirstName());
+				contactsInCities.put(newContact.getCity(), names);
 			}
 			
-			if(contactsInStates.containsKey(state)) {
-				ArrayList<String> names=contactsInCities.get(state);
-				names.add(firstName);
-				contactsInStates.replace(state, names);
+			if(contactsInStates.containsKey(newContact.getState())) {
+				ArrayList<String> names=contactsInCities.get(newContact.getState());
+				names.add(newContact.getFirstName());
+				contactsInStates.replace(newContact.getState(), names);
 			}else {
 				ArrayList<String> names=new ArrayList<>();
-				names.add(firstName);
-				contactsInStates.put(state, names);
+				names.add(newContact.getFirstName());
+				contactsInStates.put(newContact.getState(), names);
 			}
 		}
 		else
