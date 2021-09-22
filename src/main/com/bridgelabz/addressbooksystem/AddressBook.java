@@ -45,73 +45,22 @@ public class AddressBook implements AddressBookIF{
 	
 	public void writeData(String name, IOService ioService) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
 		if(ioService==IOService.FILE_IO) {
-			StringBuffer contactBuffer = new StringBuffer();
-			addressBook.forEach(contact -> {
-				String contactString = contact.toString().concat("\n");
-				contactBuffer.append(contactString);
-			});
-			
-			try {
-				Files.write(Paths.get(name),contactBuffer.toString().getBytes());
-			} catch(IOException e) {
-				e.printStackTrace();
-			}
+			new AddressBookIO().writeDataToFile(this.addressBook, name);
 		}
 		else if(ioService==IOService.CSV_IO) {
-			try(
-				Writer writer=Files.newBufferedWriter(Paths.get(name));
-			){
-				StatefulBeanToCsv<Contact> beanToCsv=new StatefulBeanToCsvBuilder(writer)
-															.withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-															.build();
-				List<Contact> addressbook=new ArrayList(addressBook);
-				beanToCsv.write(addressBook);
-				
-			}
+			new AddressBookIO().writeDataToCsv(this.addressBook, name);
 		}else if(ioService==IOService.JSON_IO) {
-			Gson gson=new Gson();
-			String json=gson.toJson(addressBook);
-			FileWriter writer =new FileWriter(name);
-			writer.write(json);		
-			writer.close();
+			new AddressBookIO().writeDataToJson(this.addressBook, name);
 		}
 	}
 	
 	public static void readData(String name, IOService ioService) throws FileNotFoundException{
 		if(ioService==IOService.FILE_IO) {
-			List<Contact> listOfContacts=new ArrayList<Contact>();
-			try {
-				Files.lines(new File("office.txt").toPath())
-				.map(line-> line.trim())
-				.forEach(line -> System.out.println(line));
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
+			new AddressBookIO().readFromFile(name);
 		}else if(ioService== IOService.CSV_IO) {
-			try {
-	            Reader reader = Files.newBufferedReader(Paths.get(name+".csv"));
-	            CSVReader csvReader = new CSVReader(reader);
-	            String[] nextRecord;
-	            System.out.println("Contact Details Are");
-	            while (((nextRecord = csvReader.readNext())) != null) {
-	                System.out.println("firstName : " + nextRecord[0]);
-	                System.out.println("lastName : " + nextRecord[1]);
-	                System.out.println("address : " + nextRecord[2]);
-	                System.out.println("city : " + nextRecord[3]);
-	                System.out.println("state : " + nextRecord[4]);
-	                System.out.println("zip : " + nextRecord[5]);
-	                System.out.println("phoneNumber : " + nextRecord[6]);
-	                System.out.println("email : " + nextRecord[7]);
-	            }
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+			new AddressBookIO().readFromCsv(name);
 		}else if(ioService==IOService.JSON_IO) {
-			Gson gson=new Gson();
-			BufferedReader br=new BufferedReader(new FileReader(name));
-			Contact[] contactsFile= gson.fromJson(br, Contact[].class);
-			List<Contact> addressbook=Arrays.asList(contactsFile);
-			System.out.println(addressbook);
+			new AddressBookIO().readFromJson(name);
 		}
 	}
 	
@@ -297,5 +246,6 @@ public class AddressBook implements AddressBookIF{
 	public int size() {
 		return addressBook.size();
 	}
+
 
 }
