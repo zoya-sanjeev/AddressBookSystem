@@ -1,1 +1,1 @@
-zoya, sanjeev, tel, null, 12212, 12313123, dsds
+Contact{firstName='Zoya', lastName='Sanjeev', address='abc', city='Hyd', state='Tel', zip=123456, phoneNumber=1234567890, email='abc@gmail.com'}

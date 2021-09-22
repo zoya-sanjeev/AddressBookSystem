@@ -72,8 +72,9 @@ public class AddressBookIO {
 		return listOfContacts;
 	}
 	
-	public String[] readFromCsv(String name) {
+	public int readFromCsv(String name) {
 		String[] nextRecord= {};
+		int numOfRecords=0;
 		try {
             Reader reader = Files.newBufferedReader(Paths.get(name+".csv"));
             CSVReader csvReader = new CSVReader(reader);
@@ -87,12 +88,13 @@ public class AddressBookIO {
                 System.out.println("zip : " + nextRecord[5]);
                 System.out.println("phoneNumber : " + nextRecord[6]);
                 System.out.println("email : " + nextRecord[7]);
+                numOfRecords++;
             }
             
         } catch (IOException e) {
             e.printStackTrace();
         }
-		return nextRecord;
+		return numOfRecords;
 	}
 	
 	public List<Contact> readFromJson(String name) throws FileNotFoundException {

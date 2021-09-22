@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
@@ -14,11 +15,11 @@ import main.com.bridgelabz.addressbooksystem.AddressBookIO;
 import main.com.bridgelabz.addressbooksystem.Contact;
 
 public class AddressBookTest {
+	static AddressBook addressBook;
 	
-	
-	@Test
-	public void givenContacts_shouldAddToAddressBook() {
-		AddressBook addressBook= new AddressBook("addressbook1");
+	@BeforeClass
+    public static void init() {
+		addressBook= new AddressBook("addressbook1");
 		String firstName="Zoya";
 		String lastName="Sanjeev";
 		String address="abc";
@@ -29,6 +30,11 @@ public class AddressBookTest {
 		String emailId="abc@gmail.com";
 		Contact newContact=new Contact(firstName,lastName,address,city,state, zipCode,phoneNumber,emailId);
 		addressBook.addContact(newContact);
+    }	
+	
+	
+	@Test
+	public void givenContacts_shouldAddToAddressBook() {
 		Assert.assertEquals(1, addressBook.size());
 		
 	}
@@ -36,42 +42,25 @@ public class AddressBookTest {
 	@Test
 	public void givenAddressBook_whenWrittenToFile_shouldMatchEntries() {
 		
-		AddressBook addressBook= new AddressBook("addressbook1");
-		String firstName="Zoya";
-		String lastName="Sanjeev";
-		String address="abc";
-		String city="Hyd";
-		String state="Tel";
-		int zipCode=123456;
-		int phoneNumber=1234567890;
-		String emailId="abc@gmail.com";
-		Contact newContact=new Contact(firstName,lastName,address,city,state, zipCode,phoneNumber,emailId);
-		addressBook.addContact(newContact);
-		
-		new AddressBookIO().writeDataToFile(addressBook.addressBook, "office");
-		
-		List<String> contacts= new AddressBookIO().readFromFile("office");
+		new AddressBookIO().writeDataToFile(addressBook.addressBook, "office.txt");
+		List<String> contacts= new AddressBookIO().readFromFile("office.txt");
 		Assert.assertEquals( 1,contacts.size());
 		
 	}
 	@Test
-	public void givenAddressBook_whenWrittenToCSVFile_shouldMatchEntries() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
-		AddressBook addressBook= new AddressBook("addressbook1");
-		String firstName="Zoya";
-		String lastName="Sanjeev";
-		String address="abc";
-		String city="Hyd";
-		String state="Tel";
-		int zipCode=123456;
-		int phoneNumber=1234567890;
-		String emailId="abc@gmail.com";
-		Contact newContact=new Contact(firstName,lastName,address,city,state, zipCode,phoneNumber,emailId);
-		addressBook.addContact(newContact);
+	public void givenAddressBook_whenWrittenToCSVFile_shouldMatchEntries() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {	
+		new AddressBookIO().writeDataToCsv(addressBook.addressBook, "school.csv");
 		
-		new AddressBookIO().writeDataToCsv(addressBook.addressBook, "school");
+		int contacts=new AddressBookIO().readFromCsv("school.csv");
+		Assert.assertEquals( 1,contacts);
+	}
+	
+	@Test
+	public void givenAddressBook_whenWrittenToJSONFile_shouldMatchEntries() throws IOException {
+		new AddressBookIO().writeDataToJson(addressBook.addressBook, "friends.json");
 		
-		String[] contacts=new AddressBookIO().readFromCsv("school");
-		Assert.assertEquals( 1,contacts.length);
+		List<Contact> contacts=new AddressBookIO().readFromJson("friends.json");
+		Assert.assertEquals( 1,contacts.size());
 	}
 
 }
