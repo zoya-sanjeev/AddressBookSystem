@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 
 public class AddressBook {
 	Scanner sc=new Scanner(System.in);
-	LinkedList<Contact> addressBook;
+	public LinkedList<Contact> addressBook;
 	public static HashMap<String, ArrayList<String>> contactsInCities=new HashMap<>();
 	public static HashMap<String, ArrayList<String>> contactsInStates=new HashMap<>();
 	String name;
@@ -121,6 +121,8 @@ public class AddressBook {
 		String firstName = sc.next();
 		System.out.println("Enter last name");
 		String lastName = sc.next();
+		System.out.println("Enter address");
+		String address=sc.next();
 		System.out.println("Enter city");
 		String city = sc.next();
 		System.out.println("Enter state");
@@ -132,7 +134,7 @@ public class AddressBook {
 		System.out.println("Enter email");
 		String email = sc.next();
 		
-		Contact newContact=new Contact(firstName,lastName,city,state,zip,phoneNumber,email);
+		Contact newContact=new Contact(firstName,lastName,address,city,state,zip,phoneNumber,email);
 		return newContact;
 		
 	}
@@ -277,5 +279,9 @@ public class AddressBook {
 		addressBook.stream()
 		.sorted((contact1, contact2) -> String.valueOf(contact1.getZipCode()).compareTo(String.valueOf(contact2.getZipCode())))
 		.forEach(contact -> System.out.print(contact.getFirstName()+":"+contact.getZipCode()+" "));
+	}
+	
+	public int size() {
+		return addressBook.size();
 	}
 }
