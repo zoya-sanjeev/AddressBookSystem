@@ -38,6 +38,7 @@ public class AddressBookIO {
 			e.printStackTrace();
 		}
 		
+		
 	}
 	
 	public void writeDataToCsv(List<Contact> addressBook, String name) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
@@ -58,22 +59,24 @@ public class AddressBookIO {
 		writer.close();
 	}
 	
-	public void readFromFile(String name) {
-		List<Contact> listOfContacts=new ArrayList<Contact>();
+	public List<String> readFromFile(String name) {
+		List<String> listOfContacts=new ArrayList<String>();
 		try {
 			Files.lines(new File(name +".txt").toPath())
-			.map(line-> line.trim())
-			.forEach(line -> System.out.println(line));
+			.map(contact-> contact.trim())
+			.forEach(contact -> {System.out.println(contact);
+								listOfContacts.add(contact);});
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		return listOfContacts;
 	}
 	
-	public void readFromCsv(String name) {
+	public String[] readFromCsv(String name) {
+		String[] nextRecord= {};
 		try {
             Reader reader = Files.newBufferedReader(Paths.get(name+".csv"));
             CSVReader csvReader = new CSVReader(reader);
-            String[] nextRecord;
             System.out.println("Contact Details Are");
             while (((nextRecord = csvReader.readNext())) != null) {
                 System.out.println("firstName : " + nextRecord[0]);
@@ -85,17 +88,20 @@ public class AddressBookIO {
                 System.out.println("phoneNumber : " + nextRecord[6]);
                 System.out.println("email : " + nextRecord[7]);
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
+		return nextRecord;
 	}
 	
-	public void readFromJson(String name) throws FileNotFoundException {
+	public List<Contact> readFromJson(String name) throws FileNotFoundException {
 		Gson gson=new Gson();
 		BufferedReader br=new BufferedReader(new FileReader(name));
 		Contact[] contactsFile= gson.fromJson(br, Contact[].class);
 		List<Contact> addressbook=Arrays.asList(contactsFile);
 		System.out.println(addressbook);
+		return addressbook;
 	}
 
 }

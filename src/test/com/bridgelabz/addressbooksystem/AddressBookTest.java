@@ -1,12 +1,20 @@
 package test.com.bridgelabz.addressbooksystem;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 import main.com.bridgelabz.addressbooksystem.AddressBook;
+import main.com.bridgelabz.addressbooksystem.AddressBookIO;
 import main.com.bridgelabz.addressbooksystem.Contact;
 
 public class AddressBookTest {
+	
 	
 	@Test
 	public void givenContacts_shouldAddToAddressBook() {
@@ -24,6 +32,46 @@ public class AddressBookTest {
 		Assert.assertEquals(1, addressBook.size());
 		
 	}
-	
+
+	@Test
+	public void givenAddressBook_whenWrittenToFile_shouldMatchEntries() {
+		
+		AddressBook addressBook= new AddressBook("addressbook1");
+		String firstName="Zoya";
+		String lastName="Sanjeev";
+		String address="abc";
+		String city="Hyd";
+		String state="Tel";
+		int zipCode=123456;
+		int phoneNumber=1234567890;
+		String emailId="abc@gmail.com";
+		Contact newContact=new Contact(firstName,lastName,address,city,state, zipCode,phoneNumber,emailId);
+		addressBook.addContact(newContact);
+		
+		new AddressBookIO().writeDataToFile(addressBook.addressBook, "office");
+		
+		List<String> contacts= new AddressBookIO().readFromFile("office");
+		Assert.assertEquals( 1,contacts.size());
+		
+	}
+	@Test
+	public void givenAddressBook_whenWrittenToCSVFile_shouldMatchEntries() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
+		AddressBook addressBook= new AddressBook("addressbook1");
+		String firstName="Zoya";
+		String lastName="Sanjeev";
+		String address="abc";
+		String city="Hyd";
+		String state="Tel";
+		int zipCode=123456;
+		int phoneNumber=1234567890;
+		String emailId="abc@gmail.com";
+		Contact newContact=new Contact(firstName,lastName,address,city,state, zipCode,phoneNumber,emailId);
+		addressBook.addContact(newContact);
+		
+		new AddressBookIO().writeDataToCsv(addressBook.addressBook, "school");
+		
+		String[] contacts=new AddressBookIO().readFromCsv("school");
+		Assert.assertEquals( 1,contacts.length);
+	}
 
 }
