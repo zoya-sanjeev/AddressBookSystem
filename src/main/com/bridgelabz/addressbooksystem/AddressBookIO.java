@@ -24,6 +24,8 @@ import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import main.com.bridgelabz.addressbooksystem.AddressBook.IOService;
+
 public class AddressBookIO {
 	
 	public void writeDataToFile(List<Contact> addressBook, String name) {
@@ -111,6 +113,14 @@ public class AddressBookIO {
 		List<Contact> contactList=new ArrayList<>();
 		contactList=new AddressBookDBService().readData(name);
 		return contactList;
+	}
+
+	public boolean updateAddressBook(String firstName, String newAddress, IOService service) {
+		if(service==IOService.DB_IO)
+			 if(new AddressBookDBService().updateAddress(firstName, newAddress) ==0)
+				 return false;
+			 
+		return true;					 	
 	}
 
 }

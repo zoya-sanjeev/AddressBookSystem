@@ -61,4 +61,17 @@ public class AddressBookDBService {
 		return contactList;
 	}
 
+	public int updateAddress(String firstName, String newAddress) {
+		String sql = String.format("update address set address='%s' where contact_id ="
+				+ "(select contact_id from contact where first_name='%s');", newAddress,firstName);
+		try(Connection connection =this.getConnection()) {
+			Statement statement = connection.createStatement();
+			return statement.executeUpdate(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+
 }
