@@ -2,6 +2,7 @@ package main.com.bridgelabz.addressbooksystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,6 +12,7 @@ import java.util.List;
 
 
 public class AddressBookDBService {
+	private PreparedStatement contactStatement;
 	
 	private Connection getConnection() throws SQLException {
 		String jdbcURL="jdbc:mysql://localhost:3306/addressBookService?useSSL=false";
@@ -71,6 +73,23 @@ public class AddressBookDBService {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public Contact getContactFromDB(String firstName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	private void prepareStatementForContact() {
+		try {
+			Connection connection =this.getConnection();
+			String sql= "select c.first_name, c.last_name, c.phone_number, c.email, a.address, a.city,a.state, a.zipCode"
+					+ " from contact c, address	 a"
+					+ " where c.contact_id=a.contact_id and c.first_name=?";
+			contactStatement=connection.prepareStatement(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
