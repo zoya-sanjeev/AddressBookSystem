@@ -42,17 +42,17 @@ public class AddressBookTest {
 	@Test
 	public void givenAddressBook_whenWrittenToFile_shouldMatchEntries() {
 		
-		new AddressBookIO().writeDataToFile(addressBook.addressBook, "office.txt");
-		List<String> contacts= new AddressBookIO().readFromFile("office.txt");
+		new AddressBookIO().writeDataToFile(addressBook.addressBook, "office");
+		List<String> contacts= new AddressBookIO().readFromFile("office");
 		Assert.assertEquals( 1,contacts.size());
 		
 	}
 	@Test
 	public void givenAddressBook_whenWrittenToCSVFile_shouldMatchEntries() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {	
-		new AddressBookIO().writeDataToCsv(addressBook.addressBook, "school.csv");
+		new AddressBookIO().writeDataToCsv(addressBook.addressBook, "school");
 		
-		int contacts=new AddressBookIO().readFromCsv("school.csv");
-		Assert.assertEquals( 1,contacts);
+		int contacts=new AddressBookIO().readFromCsv("school");
+		Assert.assertEquals( 2,contacts);
 	}
 	
 	@Test
