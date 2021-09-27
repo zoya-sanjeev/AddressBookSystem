@@ -71,6 +71,7 @@ public class AddressBookTest {
 		Assert.assertEquals(2, contactList.size());
 		
 	}
+	
 	@Test
 	public void givenContactFirstName_whenUpdatedAddress_shouldSyncWithDB() throws SQLException{
 		String newAddress="street20";
