@@ -76,8 +76,17 @@ public class AddressBookDBService {
 	}
 
 	public Contact getContactFromDB(String firstName) {
-		// TODO Auto-generated method stub
-		return null;
+		Contact contact=null;
+		if(contactStatement==null)
+			this.prepareStatementForContact();
+		try {
+			contactStatement.setString(1, firstName);
+			ResultSet result = contactStatement.executeQuery();
+			contact=getcontactData(result).get(0);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return contact;
 	}
 	
 	private void prepareStatementForContact() {

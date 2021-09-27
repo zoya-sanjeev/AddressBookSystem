@@ -81,7 +81,7 @@ public class AddressBookTest {
 	
 	@Test
 	public void givenContactFirstName_ShouldRetrieveFromDB()throws SQLException {
-		String firstName="Zoya";
+		String firstName="zoya";
 		Contact contact=new AddressBookIO().getContactFromDB(firstName, IOService.DB_IO);
 		Assert.assertEquals(firstName, contact.getFirstName());
 	}

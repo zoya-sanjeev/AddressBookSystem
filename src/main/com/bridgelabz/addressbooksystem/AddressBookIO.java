@@ -123,4 +123,11 @@ public class AddressBookIO {
 		return true;					 	
 	}
 
+	public Contact getContactFromDB(String firstName, IOService service) {
+		Contact contact=null;
+		if(service==IOService.DB_IO)
+			contact=new AddressBookDBService().getContactFromDB(firstName);
+		return contact;
+	}
+
 }
