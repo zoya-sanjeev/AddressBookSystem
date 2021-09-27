@@ -1,5 +1,6 @@
 package main.com.bridgelabz.addressbooksystem;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import javax.imageio.spi.IIOServiceProvider;
@@ -13,12 +14,12 @@ public class AddressBookMain {
 	
 	static Scanner sc=new Scanner(System.in);
 	
-	public static void main(String[] args) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
+	public static void main(String[] args) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException, SQLException {
 		System.out.println("Welcome to Address Book");
 		getMenu();
 	}
 	
-	public static void getMenu() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
+	public static void getMenu() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException, SQLException {
 		AddressBookArray addressBookArray=new AddressBookArray();
 		
 		

@@ -1,6 +1,7 @@
 package test.com.bridgelabz.addressbooksystem;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Assert;
@@ -61,6 +62,12 @@ public class AddressBookTest {
 		
 		List<Contact> contacts=new AddressBookIO().readFromJson("friends.json");
 		Assert.assertEquals( 1,contacts.size());
+	}
+	@Test 
+	public void givenAddressBookNameOnReadingFromDBShouldMatchContactCount() throws SQLException {
+		List<Contact> contactList=new AddressBookIO().readFromDB("book1");
+		Assert.assertEquals(2, contactList.size());
+		
 	}
 
 }

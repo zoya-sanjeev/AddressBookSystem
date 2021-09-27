@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.*;
 
 import com.opencsv.CSVReader;
@@ -55,7 +56,7 @@ public class AddressBook implements AddressBookIF{
 		}
 	}
 	
-	public static void readData(String name, IOService ioService) throws FileNotFoundException{
+	public static void readData(String name, IOService ioService) throws FileNotFoundException, SQLException{
 		if(ioService==IOService.FILE_IO) {
 			new AddressBookIO().readFromFile(name);
 		}else if(ioService== IOService.CSV_IO) {
@@ -63,7 +64,7 @@ public class AddressBook implements AddressBookIF{
 		}else if(ioService==IOService.JSON_IO) {
 			new AddressBookIO().readFromJson(name);
 		}else if(ioService == IOService.DB_IO);
-			new AddressBookIO().readFromDB(name);
+			List<Contact> contactList=new AddressBookIO().readFromDB(name);
 	}
 	
 	@Override

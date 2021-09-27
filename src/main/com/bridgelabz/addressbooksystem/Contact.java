@@ -17,11 +17,11 @@ public class Contact {
 	@CsvBindByName
 	private int zipCode;
 	@CsvBindByName
-	private int phoneNumber;
+	private long phoneNumber;
 	@CsvBindByName
 	private String emailId;
 	
-	public Contact(String firstName,String lastName,String address,String city,String state,int zipCode,int phoneNumber,String emailId){
+	public Contact(String firstName,String lastName,String address,String city,String state,int zipCode,long phoneNumber,String emailId){
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.address=address;
@@ -68,7 +68,7 @@ public class Contact {
 	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
-	public int getPhoneNumber() {
+	public long getPhoneNumber() {
 		return phoneNumber;
 	}
 	public void setPhoneNumber(int phoneNumber) {
