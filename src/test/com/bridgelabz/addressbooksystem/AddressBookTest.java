@@ -17,6 +17,7 @@ import main.com.bridgelabz.addressbooksystem.Contact;
 
 public class AddressBookTest {
 	static AddressBook addressBook;
+	static Contact newContact;
 	
 	@BeforeClass
     public static void init() {
@@ -29,7 +30,7 @@ public class AddressBookTest {
 		int zipCode=123456;
 		int phoneNumber=1234567890;
 		String emailId="abc@gmail.com";
-		Contact newContact=new Contact(firstName,lastName,address,city,state, zipCode,phoneNumber,emailId);
+		newContact=new Contact(firstName,lastName,address,city,state, zipCode,phoneNumber,emailId);
 		addressBook.addContact(newContact);
     }	
 	
@@ -64,9 +65,17 @@ public class AddressBookTest {
 		Assert.assertEquals( 1,contacts.size());
 	}
 	@Test 
-	public void givenAddressBookNameOnReadingFromDBShouldMatchContactCount() throws SQLException {
+	public void givenAddressBookName_OnReadingFromDB_ShouldMatchContactCount() throws SQLException {
 		List<Contact> contactList=new AddressBookIO().readFromDB("book1");
 		Assert.assertEquals(2, contactList.size());
+		
+	}
+	@Test
+	public void givenAddressBookName_whenUpdated_shouldSyncWithDB() throws SQLException{
+		new AddressBookIO().updateAddressBook(newContact, "book1");
+		List<Contact> contactList=new AddressBookIO().readFromDB("book1");
+		boolean result=contactList.contains(newContact);
+		Assert.assertTrue(result);
 		
 	}
 
