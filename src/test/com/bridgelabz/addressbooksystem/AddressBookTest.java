@@ -78,5 +78,12 @@ public class AddressBookTest {
 		Assert.assertTrue(result);
 		
 	}
+	
+	@Test
+	public void givenContactFirstName_ShouldRetrieveFromDB()throws SQLException {
+		String firstName="Zoya";
+		Contact contact=new AddressBookIO().getContactFromDB(firstName, IOService.DB_IO);
+		Assert.assertEquals(firstName, contact.getFirstName());
+	}
 
 }
