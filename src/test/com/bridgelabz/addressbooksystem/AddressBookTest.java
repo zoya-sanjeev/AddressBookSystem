@@ -86,5 +86,12 @@ public class AddressBookTest {
 		Contact contact=new AddressBookIO().getContactFromDB(firstName, IOService.DB_IO);
 		Assert.assertEquals(firstName, contact.getFirstName());
 	}
+	
+	@Test
+	public void givenCity_WhenRetreivedFromDB_ShouldMatchCount() throws SQLException{
+		String city="hyderabad";
+		int result= new AddressBookIO().getContactBasedOnCity(city, IOService.DB_IO);
+		Assert.assertArrayEquals(2, result);
+	}
 
 }
