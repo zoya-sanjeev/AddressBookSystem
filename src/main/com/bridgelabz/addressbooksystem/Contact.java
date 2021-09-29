@@ -21,7 +21,7 @@ public class Contact {
 	private long phoneNumber;
 	@CsvBindByName
 	private String emailId;
-	
+	public int id;
 	Address contactAddress;
 	
 	public Contact(String firstName,String lastName,String address,String city,String state,int zipCode,long phoneNumber,String emailId){
@@ -39,6 +39,13 @@ public class Contact {
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.contactAddress=address;
+		this.phoneNumber=phoneNumber;
+		this.emailId=emailId;
+	}
+	public Contact(int id,String firstName,String lastName,long phoneNumber,String emailId) {
+		this.id=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
 		this.phoneNumber=phoneNumber;
 		this.emailId=emailId;
 	}

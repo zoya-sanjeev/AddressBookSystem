@@ -119,7 +119,7 @@ public class AddressBookDBService {
 		List<Contact> listOfContacts=new ArrayList<Contact>();
 		String sql= String.format("select c.first_name, c.last_name, c.phone_number, c.email, a.address, a.city,a.state, a.zipCode"
 								+ " from contact c, address	 a"
-							+   " where c.contact_id=a.contact_id and city='%s'", state);
+							+   " where c.contact_id=a.contact_id and state='%s'", state);
 		try(Connection connection =this.getConnection()) {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -130,7 +130,74 @@ public class AddressBookDBService {
 		return listOfContacts.size();
 	}
 	
-	
+	public Contact addNewContactToContacts(int contactId, String firstName, String lastName, long phoneNumber, String email, int addressId, String dateAdded, int addressBookId) {
+		
+		int id = -1;
+		Connection connection = null;
+		Contact contact = null;
+		
+		try {
+			connection = this.getConnection();
+			connection.setAutoCommit(false);
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+		}
+		try (Statement statement = connection.createStatement()){
+			
+			String sql = String.format("INSERT INTO contact (contact_id, first_name, last_name, phone_number, email) VALUES ('%s', '%s', '%s', '%s', '%s')", contactId, firstName, lastName, phoneNumber, email);
+			
+			int rowAffected = statement.executeUpdate(sql, statement.RETURN_GENERATED_KEYS);
+			if(rowAffected == 1) {
+				ResultSet resultSet = statement.getGeneratedKeys();
+				if(resultSet.next())
+					id = resultSet.getInt(1);
+			}
+			contact = new Contact(id, firstName, lastName, email, phoneNumber);
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException exception) {
+				exception.printStackTrace();
+			}
+		}
+		
+		try(Statement statement = connection.createStatement()){
+
+			String sqlQuery = String.format("INSERT INTO addressbook_contact VALUES ('%s', '%s')",contactId, addressBookId);
+			int rowAffected = statement.executeUpdate(sqlQuery);
+			if (rowAffected == 1) {
+				contactPerson = new ContactPerson(contactId, firstName, lastName, email, phoneNumber);
+			}			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException exception) {
+				exception.printStackTrace();
+			}
+		}
+		
+		try {
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(connection != null)
+				try {
+					connection.close();
+				} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return contactPerson;
+	}
 
 
 }
