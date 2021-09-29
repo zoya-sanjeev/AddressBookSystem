@@ -31,5 +31,11 @@ public class Address {
 		this.zipCode = zipCode;
 	}
 	
+	public Address(String address,String city, String state, long zipCode) {
+		this.address=address;
+		this.city=city;
+		this.state=state;
+		this.zipCode=zipCode;
+	}
 
 }
