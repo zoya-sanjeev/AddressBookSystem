@@ -91,7 +91,7 @@ public class AddressBookTest {
 	public void givenCity_WhenRetreivedFromDB_ShouldMatchCount() throws SQLException{
 		String city="hyderabad";
 		int result= new AddressBookIO().getContactBasedOnCity(city, IOService.DB_IO);
-		Assert.assertArrayEquals(2, result);
+		Assert.assertEquals(2, result);
 	}
 
 }

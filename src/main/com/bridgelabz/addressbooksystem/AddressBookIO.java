@@ -130,4 +130,10 @@ public class AddressBookIO {
 		return contact;
 	}
 
+	public int getContactBasedOnCity(String city, IOService service) {
+		if(service==IOService.DB_IO)
+			return new AddressBookDBService().getContactBasedOnCity(city);
+		return 0;
+	}
+
 }
