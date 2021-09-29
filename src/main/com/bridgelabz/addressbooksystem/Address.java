@@ -2,6 +2,8 @@ package main.com.bridgelabz.addressbooksystem;
 
 public class Address {
 	
+	public int contactId;
+	public int AddressId;
 	public String address;
 	public String city;
 	public String state;

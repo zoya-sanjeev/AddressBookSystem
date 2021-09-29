@@ -73,9 +73,9 @@ public class AddressBookTest {
 	}
 	
 	@Test
-	public void givenContactFirstName_whenUpdatedAddress_shouldSyncWithDB() throws SQLException{
-		String newAddress="street20";
-		boolean result=new AddressBookIO().updateAddressBook("Zoya",newAddress, IOService.DB_IO);
+	public void givenContactFirstName_whenUpdatedEmail_shouldSyncWithDB() throws SQLException{
+		String newEmail="zoya29@gmail.com";
+		boolean result=new AddressBookIO().updateContactEmail("zoya",newEmail, IOService.DB_IO);
 		Assert.assertTrue(result);
 		
 	}

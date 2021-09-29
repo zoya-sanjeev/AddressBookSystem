@@ -55,7 +55,7 @@ public class AddressBookDBService {
 				String city=resultSet.getString("city");
 				String state=resultSet.getString("state");
 				int zipCode=resultSet.getInt("zipCode");
-				contactList.add(new Contact(firstName,lastName,address,city,state,zipCode,phoneNumber,email)); 		
+				contactList.add(new Contact(firstName,lastName,new Address(address,city,state,zipCode),phoneNumber,email)); 		
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -63,9 +63,8 @@ public class AddressBookDBService {
 		return contactList;
 	}
 
-	public int updateAddress(String firstName, String newAddress) {
-		String sql = String.format("update address set address='%s' where contact_id ="
-				+ "(select contact_id from contact where first_name='%s');", newAddress,firstName);
+	public int updateContactEmail(String firstName, String email) {
+		String sql = String.format("update contact set email= '%s' where first_name='%s';",email,firstName);
 		try(Connection connection =this.getConnection()) {
 			Statement statement = connection.createStatement();
 			return statement.executeUpdate(sql);

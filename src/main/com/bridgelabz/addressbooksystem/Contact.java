@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvBindByName;
 
 public class Contact {
 	
+	public int contactId;
 	@CsvBindByName
 	private String firstName;
 	@CsvBindByName
