@@ -93,5 +93,11 @@ public class AddressBookTest {
 		int result= new AddressBookIO().getContactBasedOnCity(city, IOService.DB_IO);
 		Assert.assertEquals(2, result);
 	}
+	@Test
+	public void givenState_WhenRetreivedFromDB_ShouldMatchCount() throws SQLException{
+		String state="karnataka";
+		int result= new AddressBookIO().getContactBasedOnState(state, IOService.DB_IO);
+		Assert.assertEquals(2, result);
+	}
 
 }
