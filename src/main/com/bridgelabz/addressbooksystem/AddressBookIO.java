@@ -136,4 +136,10 @@ public class AddressBookIO {
 		return 0;
 	}
 
+	public int getContactBasedOnState(String state, IOService service) {
+		if(service==IOService.DB_IO)
+			return new AddressBookDBService().getContactBasedOnState(state);
+		return 0;
+	}
+
 }
