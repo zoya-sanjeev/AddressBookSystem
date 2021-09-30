@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import main.com.bridgelabz.addressbooksystem.Address;
 import main.com.bridgelabz.addressbooksystem.AddressBook;
 import main.com.bridgelabz.addressbooksystem.AddressBook.IOService;
 import main.com.bridgelabz.addressbooksystem.AddressBookIO;
@@ -104,6 +105,23 @@ public class AddressBookTest {
 		String state="karnataka";
 		int result= new AddressBookIO().getContactBasedOnState(state, IOService.DB_IO);
 		Assert.assertEquals(2, result);
+	}
+	
+	@Test
+	public void givenContact_whenAdded_shouldSyncWithDB() throws SQLException{
+		AddressBookIO addressBookIO=new AddressBookIO();
+		List<Contact> contactList=new AddressBookIO().readFromDB(IOService.DB_IO);
+		int id=14;
+		String firstName="Harry";
+		String lastName="Potter";
+		Address address=new Address(id,"privetdrive","mumbai","maharashtra",300100);
+		long phoneNumber=Long.parseLong("9090909055");
+		String emailId="harry@gmail.com";
+		LocalDate dateAdded=LocalDate.now();
+		addressBookIO.addContactToDB(id,firstName,lastName,address,phoneNumber,emailId, dateAdded);
+		boolean result=addressBookIO.checkContactInSyncWithDB(firstName);
+		Assert.assertTrue(result);
+		
 	}
 
 }
