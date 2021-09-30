@@ -115,8 +115,10 @@ public class AddressBookIO {
 		return null;
 	}
 
-	public void updateContactEmail(String firstName, String newEmail, IOService dbIo) {
-		int result=new AddressBookDBService().updateContactEmail();
+	public void updateContactEmail(String firstName, String newEmail, IOService service) {
+		int result=0;
+		if(service==IOService.DB_IO)
+			result=new AddressBookDBService().updateContactEmail(firstName,newEmail);
 		if(result==0) return;
 		
 	}
