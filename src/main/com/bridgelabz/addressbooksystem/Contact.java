@@ -86,7 +86,7 @@ public class Contact {
 	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
-	public int getPhoneNumber() {
+	public long getPhoneNumber() {
 		return phoneNumber;
 	}
 	public void setPhoneNumber(int phoneNumber) {

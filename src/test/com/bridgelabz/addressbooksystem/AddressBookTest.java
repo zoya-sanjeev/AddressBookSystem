@@ -62,5 +62,11 @@ public class AddressBookTest {
 		List<Contact> contacts=new AddressBookIO().readFromJson("friends.json");
 		Assert.assertEquals( 1,contacts.size());
 	}
+	
+	@Test 
+	public void whenReadContactsFromDatabase_ShouldMatchContactCount() throws SQLException {
+		List<Contact> contactList=new AddressBookIO().readFromDB();
+		Assert.assertEquals(4, contactList.size());	
+	}
 
 }
