@@ -11,6 +11,7 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,9 +109,10 @@ public class AddressBookIO {
 		return addressbook;
 	}
 
-	public List<Contact> readFromDB(IOService service) {
+	public List<Contact> readFromDB(IOService service) throws SQLException {
 		if(service==IOService.DB_IO) 
 			return new AddressBookDBService().readFromDB();
+		return null;
 	}
 
 }

@@ -45,11 +45,10 @@ public class AddressBookDBService {
 		return contactList;
 	}
 	
-	public List<Contact> readFromDB(String name) throws SQLException{
+	public List<Contact> readFromDB() throws SQLException{
 		String sql = String.format("select c.contact_id, c.first_name, c.last_name, c.phone_number, c.email, a.address, a.city,a.state, a.zipCode"
-				+ " from contact c, address	 a, addressbook ab, contact_type t"
-				+ " where c.contact_id=t.contact_id and ab.addressbook_id=t.addressbook_id and c.contact_id=a.contact_id"
-				+ " and ab.addressbook_name='%s';",name);
+				+ " from contact c, address	 a"
+				+ " where c.contact_id=a.contact_id");
 		List<Contact> contactList= new ArrayList<>();
 		try(Connection connection =this.getConnection()) {
 			Statement statement = connection.createStatement();
