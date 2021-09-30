@@ -11,6 +11,7 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import main.com.bridgelabz.addressbooksystem.AddressBook;
+import main.com.bridgelabz.addressbooksystem.AddressBook.IOService;
 import main.com.bridgelabz.addressbooksystem.AddressBookIO;
 import main.com.bridgelabz.addressbooksystem.Contact;
 
@@ -62,10 +63,10 @@ public class AddressBookTest {
 		List<Contact> contacts=new AddressBookIO().readFromJson("friends.json");
 		Assert.assertEquals( 1,contacts.size());
 	}
-	
+		
 	@Test 
 	public void whenReadContactsFromDatabase_ShouldMatchContactCount() throws SQLException {
-		List<Contact> contactList=new AddressBookIO().readFromDB();
+		List<Contact> contactList=new AddressBookIO().readFromDB(IOService.DB_IO);
 		Assert.assertEquals(4, contactList.size());	
 	}
 
