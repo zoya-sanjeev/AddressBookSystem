@@ -1,6 +1,9 @@
 package main.com.bridgelabz.addressbooksystem;
 
+import java.time.LocalDate;
+
 import com.opencsv.bean.CsvBindByName;
+
 
 public class Contact {
 	
@@ -23,6 +26,7 @@ public class Contact {
 	
 	public int contactId;
 	Address contactAddress;
+	public LocalDate dateAdded;
 	
 	public Contact(String firstName,String lastName,String address,String city,String state,int zipCode,int phoneNumber,String emailId){
 		this.firstName=firstName;
@@ -56,6 +60,15 @@ public class Contact {
 		this.contactAddress=address;
 		this.phoneNumber=phoneNumber;
 		this.emailId=emailId;
+	}
+	public Contact(int id,String firstName,String lastName,Address address,long phoneNumber,String emailId, LocalDate date) {
+		this.contactId=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.contactAddress=address;
+		this.phoneNumber=phoneNumber;
+		this.emailId=emailId;
+		this.dateAdded=date;
 	}
 	
 	public String getFirstName() {
