@@ -27,6 +27,7 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import main.com.bridgelabz.addressbooksystem.AddressBook.IOService;
 
 public class AddressBookIO {
+	List<Contact> listOfContacts;
 	
 	public void writeDataToFile(List<Contact> addressBook, String name) {
 		StringBuffer contactBuffer = new StringBuffer();
@@ -109,6 +110,15 @@ public class AddressBookIO {
 		return addressbook;
 	}
 
+	private Contact getContact(String firstName) {
+		return this.listOfContacts.stream().
+				filter(contact -> contact.getFirstName()
+				.equals(firstName))
+				.findFirst()
+				.orElse(null);
+		
+	}
+
 	public List<Contact> readFromDB(IOService service) throws SQLException {
 		if(service==IOService.DB_IO) 
 			return new AddressBookDBService().readFromDB();
@@ -117,10 +127,22 @@ public class AddressBookIO {
 
 	public void updateContactEmail(String firstName, String newEmail, IOService service) {
 		int result=0;
-		if(service==IOService.DB_IO)
+		if(service==IOService.DB_IO) {
 			result=new AddressBookDBService().updateContactEmail(firstName,newEmail);
-		if(result==0) return;
-		
+			if(result==0) return;
+			else {
+				this.listOfContacts=new ArrayList<>();
+				listOfContacts.getContactData(firstName);
+			}
+		}
 	}
+
+	public boolean checkContactInSyncWithDB(String firstName) {
+		List<Contact> contacts=new AddressBookDBService().getContactData(firstName);
+		return contacts.get(0).equals(getContact(firstName));
+	}
+
+	
+	
 
 }
