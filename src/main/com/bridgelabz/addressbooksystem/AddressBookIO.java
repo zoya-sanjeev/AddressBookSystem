@@ -156,6 +156,13 @@ public class AddressBookIO {
 		return contacts.size();
 	}
 
+	public int getContactBasedOnState(String state, IOService service) {
+		List<Contact> contacts=new ArrayList<>();
+		if(service==IOService.DB_IO)
+			contacts=new AddressBookDBService().getContactBasedOnState(state);
+		return contacts.size();
+	}
+
 	
 	
 
