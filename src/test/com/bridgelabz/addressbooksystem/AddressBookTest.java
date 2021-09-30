@@ -2,6 +2,7 @@ package test.com.bridgelabz.addressbooksystem;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Assert;
@@ -80,6 +81,15 @@ public class AddressBookTest {
 		boolean result=addressBookIO.checkContactInSyncWithDB("zoya");
 		Assert.assertTrue(result);
 		
+	}
+	
+	@Test
+	public void givenDateRangeForContact_whenRetrieved_shouldMatchGivenCount()throws SQLException{
+		AddressBookIO addressBookIo=new AddressBookIO();
+		LocalDate startDate=LocalDate.of(2020, 01, 01);
+		LocalDate endDate=LocalDate.now();
+		List<Contact> listOfContacts=addressBookIo.getContactsOnGivenDateRange(IOService.DB_IO, startDate,endDate);
+		Assert.assertEquals(4,listOfContacts.size());
 	}
 
 }
