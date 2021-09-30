@@ -15,6 +15,8 @@ import java.util.List;
 
 import org.checkerframework.checker.units.qual.C;
 
+import main.com.bridgelabz.addressbooksystem.AddressBookException.ExceptionType;
+
 import java.sql.DriverManager;
 
 public class AddressBookDBService {
@@ -23,13 +25,17 @@ public class AddressBookDBService {
 	private PreparedStatement contactStatement;
 	
 	private Connection getConnection() throws SQLException {
+		Connection connection=null;
+		try {
 		String jdbcURL="jdbc:mysql://localhost:3306/addressBookService?useSSL=false";
 		String userName="root";
 		String password="abcd1234";
-		Connection connection;
 		System.out.println("Connecting to database"+ jdbcURL);
 		connection=DriverManager.getConnection(jdbcURL,userName,password);
 		System.out.println("Connection is successfull"+ connection);
+		}catch(SQLException e) {
+			throw new AddressBookException(ExceptionType.DB_CONNECTION_FAILED,"Connction failed");
+		}
 		return connection;
 	}
 	
@@ -56,6 +62,7 @@ public class AddressBookDBService {
 			e.printStackTrace();
 		}
 		return contactList;
+		
 	}
 
 	
@@ -70,7 +77,7 @@ public class AddressBookDBService {
 			contactList= this.getcontactData(result);
 			
 		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new AddressBookException(ExceptionType.INCORRECT_QUERY,"Check query");
 		}
 		return contactList;
 	}
@@ -86,7 +93,7 @@ public class AddressBookDBService {
 			contactList= this.getcontactData(result);
 			
 		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new AddressBookException(ExceptionType.INCORRECT_QUERY,"Check query");
 		}
 		return contactList;
 	}
@@ -97,9 +104,9 @@ public class AddressBookDBService {
 			Statement statement = connection.createStatement();
 			return statement.executeUpdate(sql);
 		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new AddressBookException(ExceptionType.UPDATE_FAIL,"Check query");
 		}
-		return 0;
+	
 	}
 
 	public List<Contact> getContactsOnGivenDateRange(LocalDate startDate, LocalDate endDate) {
@@ -114,7 +121,7 @@ public class AddressBookDBService {
 			listOfContacts= this.getcontactData(result);
 			
 		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new AddressBookException(ExceptionType.INCORRECT_QUERY,"Check query");
 		}
 		return listOfContacts;
 	}
@@ -130,7 +137,7 @@ public class AddressBookDBService {
 			ResultSet result = statement.executeQuery(sql);
 			listOfContacts= this.getcontactData(result);
 		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new AddressBookException(ExceptionType.INCORRECT_QUERY,"Check query");
 		}
 
 		return listOfContacts;
@@ -148,7 +155,7 @@ public class AddressBookDBService {
 			ResultSet result = statement.executeQuery(sql);
 			listOfContacts= this.getcontactData(result);
 		}catch(SQLException e) {
-			e.printStackTrace();
+			throw new AddressBookException(ExceptionType.INCORRECT_QUERY,"Check query");
 		}
 
 		return listOfContacts;
@@ -190,7 +197,7 @@ public class AddressBookDBService {
 			try {
 				connection.rollback();
 			} catch (SQLException exception) {
-				exception.printStackTrace();
+				throw new AddressBookException(ExceptionType.INSERT_FAIL,"Check query");
 			}
 		}
 		
@@ -213,7 +220,7 @@ public class AddressBookDBService {
 			try {
 				connection.rollback();
 			} catch (SQLException exception) {
-				exception.printStackTrace();
+				throw new AddressBookException(ExceptionType.INSERT_FAIL,"Check query");
 			}
 		}
 		
