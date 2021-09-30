@@ -12,10 +12,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-<<<<<<< HEAD
-=======
+
 import java.time.LocalDate;
->>>>>>> address_book_system_uc20
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -114,41 +113,7 @@ public class AddressBookIO {
 		return addressbook;
 	}
 
-<<<<<<< HEAD
-	public List<Contact> readFromDB(String name) throws SQLException {
-		List<Contact> contactList=new ArrayList<>();
-		contactList=new AddressBookDBService().readData(name);
-		return contactList;
-	}
 
-	public boolean updateContactEmail(String firstName, String newEmail, IOService service) {
-		if(service==IOService.DB_IO)
-			 if(new AddressBookDBService().updateContactEmail(firstName, newEmail) ==0)
-				 return false;
-			 
-		return true;					 	
-	}
-
-	public Contact getContactFromDB(String firstName, IOService service) {
-		Contact contact=null;
-		if(service==IOService.DB_IO)
-			contact=new AddressBookDBService().getContactFromDB(firstName);
-		return contact;
-	}
-
-	public int getContactBasedOnCity(String city, IOService service) {
-		if(service==IOService.DB_IO)
-			return new AddressBookDBService().getContactBasedOnCity(city);
-		return 0;
-	}
-
-	public int getContactBasedOnState(String state, IOService service) {
-		if(service==IOService.DB_IO)
-			return new AddressBookDBService().getContactBasedOnState(state);
-		return 0;
-	}
-
-=======
 	private Contact getContact(String firstName) {
 		
 		return this.listOfContacts.stream().
@@ -209,7 +174,5 @@ public class AddressBookIO {
 	}
 
 	
-	
 
->>>>>>> address_book_system_uc20
 }
