@@ -114,12 +114,12 @@ public class AddressBookTest {
 		int id=14;
 		String firstName="Harry";
 		String lastName="Potter";
-		Address address=new Address(id,"privetdrive","mumbai","maharashtra",300100);
+		Address address=new Address(id,"privetdrive","mumbai","maha",300100);
 		long phoneNumber=Long.parseLong("9090909055");
 		String emailId="harry@gmail.com";
 		LocalDate dateAdded=LocalDate.now();
-		addressBookIO.addContactToDB(id,firstName,lastName,address,phoneNumber,emailId, dateAdded);
-		boolean result=addressBookIO.checkContactInSyncWithDB(firstName);
+		Contact contact=addressBookIO.addContactToDB(id,firstName,lastName,address,phoneNumber,emailId, dateAdded);
+		boolean result=contact.getFirstName().equals(firstName);
 		Assert.assertTrue(result);
 		
 	}

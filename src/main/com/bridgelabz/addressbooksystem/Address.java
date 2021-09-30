@@ -5,9 +5,9 @@ public class Address {
 	private String address;
 	private String city;
 	private String state;
-	private long zipCode;
+	private int zipCode;
 	
-	public Address(int contactId,String address,String city, String state, long zipCode) {
+	public Address(int contactId,String address,String city, String state, int zipCode) {
 		this.contactId=contactId;
 		this.address=address;
 		this.city=city;
@@ -40,10 +40,10 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public long getZipCode() {
+	public int getZipCode() {
 		return zipCode;
 	}
-	public void setZipCode(long zipCode) {
+	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
 	

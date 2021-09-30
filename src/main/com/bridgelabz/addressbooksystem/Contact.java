@@ -70,6 +70,14 @@ public class Contact {
 		this.emailId=emailId;
 		this.dateAdded=date;
 	}
+	public Contact(int id,String firstName,String lastName,long phoneNumber,String emailId, LocalDate date) {
+		this.contactId=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.phoneNumber=phoneNumber;
+		this.emailId=emailId;
+		this.dateAdded=date;
+	}
 	
 	public String getFirstName() {
 		return firstName;

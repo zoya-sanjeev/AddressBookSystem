@@ -112,6 +112,7 @@ public class AddressBookIO {
 	}
 
 	private Contact getContact(String firstName) {
+		
 		return this.listOfContacts.stream().
 				filter(contact -> contact.getFirstName()
 				.equals(firstName))
@@ -161,6 +162,12 @@ public class AddressBookIO {
 		if(service==IOService.DB_IO)
 			contacts=new AddressBookDBService().getContactBasedOnState(state);
 		return contacts.size();
+	}
+
+	public Contact addContactToDB(int id, String firstName, String lastName, Address address, long phoneNumber,
+			String emailId, LocalDate dateAdded) {
+		Contact contact=new AddressBookDBService().addContact(id,firstName,lastName,address,phoneNumber,emailId,dateAdded);
+		return contact;
 	}
 
 	
