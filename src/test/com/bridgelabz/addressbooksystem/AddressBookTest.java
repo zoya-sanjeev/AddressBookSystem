@@ -91,5 +91,12 @@ public class AddressBookTest {
 		List<Contact> listOfContacts=addressBookIo.getContactsOnGivenDateRange(IOService.DB_IO, startDate,endDate);
 		Assert.assertEquals(4,listOfContacts.size());
 	}
+	
+	@Test
+	public void givenCity_WhenRetreivedFromDB_ShouldMatchCount() throws SQLException{
+		String city="hyderabad";
+		int result= new AddressBookIO().getContactBasedOnCity(city, IOService.DB_IO);
+		Assert.assertEquals(2, result);
+	}
 
 }
