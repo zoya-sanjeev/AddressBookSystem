@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -140,6 +141,12 @@ public class AddressBookIO {
 	public boolean checkContactInSyncWithDB(String firstName) {
 		List<Contact> contacts=new AddressBookDBService().getContactData(firstName);
 		return contacts.get(0).equals(getContact(firstName));
+	}
+
+	public List<Contact> getContactsOnGivenDateRange(IOService service, LocalDate startDate, LocalDate endDate) {
+		if(service==IOService.DB_IO)
+			return new AddressBookDBService().getContactsOnGivenDateRange(startDate,endDate);
+		return null;
 	}
 
 	

@@ -1,12 +1,17 @@
 package main.com.bridgelabz.addressbooksystem;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.checkerframework.checker.units.qual.C;
+
 import java.sql.DriverManager;
 
 public class AddressBookDBService {
@@ -86,6 +91,23 @@ public class AddressBookDBService {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public List<Contact> getContactsOnGivenDateRange(LocalDate startDate, LocalDate endDate) {
+		List<Contact> listOfContacts=new ArrayList<>();
+		String sql=String.format("select c.contact_id, c.first_name, c.last_name, c.phone_number, c.email, a.address, a.city,a.state, a.zipCode"
+				+ "  from contact c, address a"
+				+ " where c.contact_id=a.contact_id and c.date_added between '%s' and '%s';"
+				,Date.valueOf(startDate),Date.valueOf(endDate));
+		try(Connection connection =this.getConnection()) {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			listOfContacts= this.getcontactData(result);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return listOfContacts;
 	}
 
 	
