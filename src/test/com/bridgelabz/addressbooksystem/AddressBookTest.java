@@ -2,10 +2,8 @@ package test.com.bridgelabz.addressbooksystem;
 
 import java.io.IOException;
 import java.sql.SQLException;
-<<<<<<< HEAD
-=======
 import java.time.LocalDate;
->>>>>>> address_book_system_uc20
+
 import java.util.List;
 
 import org.junit.Assert;
@@ -70,51 +68,32 @@ public class AddressBookTest {
 		List<Contact> contacts=new AddressBookIO().readFromJson("friends.json");
 		Assert.assertEquals( 1,contacts.size());
 	}
-<<<<<<< HEAD
-	@Test 
-	public void givenAddressBookName_OnReadingFromDB_ShouldMatchContactCount() throws SQLException {
-		List<Contact> contactList=new AddressBookIO().readFromDB("book1");
-		Assert.assertEquals(2, contactList.size());
-		
-=======
 		
 	@Test 
 	public void whenReadContactsFromDatabase_ShouldMatchContactCount() throws SQLException {
 		List<Contact> contactList=new AddressBookIO().readFromDB(IOService.DB_IO);
 		Assert.assertEquals(4, contactList.size());	
->>>>>>> address_book_system_uc20
+
 	}
 	
 	@Test
 	public void givenContactFirstName_whenUpdatedEmail_shouldSyncWithDB() throws SQLException{
-<<<<<<< HEAD
-		String newEmail="zoya29@gmail.com";
-		boolean result=new AddressBookIO().updateContactEmail("zoya",newEmail, IOService.DB_IO);
-=======
 		String firstName="zoya";
 		String newEmail="zoya29@gmail.com";
 		AddressBookIO addressBookIO=new AddressBookIO();
 		addressBookIO.updateContactEmail(firstName,newEmail, IOService.DB_IO);
 		boolean result=addressBookIO.checkContactInSyncWithDB("zoya");
->>>>>>> address_book_system_uc20
 		Assert.assertTrue(result);
 		
 	}
 	
 	@Test
-<<<<<<< HEAD
-	public void givenContactFirstName_ShouldRetrieveFromDB()throws SQLException {
-		String firstName="zoya";
-		Contact contact=new AddressBookIO().getContactFromDB(firstName, IOService.DB_IO);
-		Assert.assertEquals(firstName, contact.getFirstName());
-=======
 	public void givenDateRangeForContact_whenRetrieved_shouldMatchGivenCount()throws SQLException{
 		AddressBookIO addressBookIo=new AddressBookIO();
 		LocalDate startDate=LocalDate.of(2020, 01, 01);
 		LocalDate endDate=LocalDate.now();
 		List<Contact> listOfContacts=addressBookIo.getContactsOnGivenDateRange(IOService.DB_IO, startDate,endDate);
 		Assert.assertEquals(4,listOfContacts.size());
->>>>>>> address_book_system_uc20
 	}
 	
 	@Test
@@ -123,18 +102,13 @@ public class AddressBookTest {
 		int result= new AddressBookIO().getContactBasedOnCity(city, IOService.DB_IO);
 		Assert.assertEquals(2, result);
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> address_book_system_uc20
+
 	@Test
 	public void givenState_WhenRetreivedFromDB_ShouldMatchCount() throws SQLException{
 		String state="karnataka";
 		int result= new AddressBookIO().getContactBasedOnState(state, IOService.DB_IO);
 		Assert.assertEquals(2, result);
 	}
-<<<<<<< HEAD
-=======
 	
 	@Test
 	public void givenContact_whenAdded_shouldSyncWithDB() throws SQLException{
@@ -152,6 +126,6 @@ public class AddressBookTest {
 		Assert.assertTrue(result);
 		
 	}
->>>>>>> address_book_system_uc20
+
 
 }
