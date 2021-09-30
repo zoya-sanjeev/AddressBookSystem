@@ -7,7 +7,7 @@ import com.opencsv.bean.CsvBindByName;
 
 public class Contact {
 	
-	public int contactId;
+	
 	@CsvBindByName
 	private String firstName;
 	@CsvBindByName
@@ -25,17 +25,13 @@ public class Contact {
 	@CsvBindByName
 	private String emailId;
 	public int id;
-	Address contactAddress;
 	
-<<<<<<< HEAD
-	public Contact(String firstName,String lastName,String address,String city,String state,int zipCode,long phoneNumber,String emailId){
-=======
 	public int contactId;
 	Address contactAddress;
 	public LocalDate dateAdded;
 	
 	public Contact(String firstName,String lastName,String address,String city,String state,int zipCode,int phoneNumber,String emailId){
->>>>>>> address_book_system_uc20
+
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.address=address;
@@ -54,19 +50,15 @@ public class Contact {
 		this.emailId=emailId;
 	}
 	public Contact(int id,String firstName,String lastName,long phoneNumber,String emailId) {
-<<<<<<< HEAD
-		this.id=id;
-=======
+
 		this.contactId=id;
->>>>>>> address_book_system_uc20
+
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.phoneNumber=phoneNumber;
 		this.emailId=emailId;
 	}
-<<<<<<< HEAD
-	
-=======
+
 	public Contact(int id,String firstName,String lastName,Address address,long phoneNumber,String emailId) {
 		this.contactId=id;
 		this.firstName=firstName;
@@ -92,7 +84,7 @@ public class Contact {
 		this.emailId=emailId;
 		this.dateAdded=date;
 	}
->>>>>>> address_book_system_uc20
+
 	
 	public String getFirstName() {
 		return firstName;
