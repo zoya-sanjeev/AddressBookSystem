@@ -45,6 +45,22 @@ public class AddressBookDBService {
 		return contactList;
 	}
 	
+	public List<Contact> getContactData(String firstName) {
+		List<Contact> contactList = new ArrayList<>();	
+		String sql=String.format("select c.contact_id, c.first_name, c.last_name, c.phone_number, c.email, a.address, a.city,a.state, a.zipCode"
+						         + " from contact c, address a"
+								+ " where c.contact_id=a.contact_id and c.first_name='%s';", firstName);
+		try(Connection connection =this.getConnection()) {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			contactList= this.getcontactData(result);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return contactList;
+	}
+	
 	public List<Contact> readFromDB() throws SQLException{
 		String sql = String.format("select c.contact_id, c.first_name, c.last_name, c.phone_number, c.email, a.address, a.city,a.state, a.zipCode"
 				+ " from contact c, address	 a"
@@ -71,5 +87,7 @@ public class AddressBookDBService {
 		}
 		return 0;
 	}
+
+	
 
 }

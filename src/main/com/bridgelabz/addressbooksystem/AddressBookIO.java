@@ -132,7 +132,7 @@ public class AddressBookIO {
 			if(result==0) return;
 			else {
 				this.listOfContacts=new ArrayList<>();
-				listOfContacts.getContactData(firstName);
+				listOfContacts=new AddressBookDBService().getContactData(firstName);
 			}
 		}
 	}
