@@ -28,6 +28,7 @@ public class AddressBookDBService {
 		List<Contact> contactList = new ArrayList<>();
 		try {
 			while(resultSet.next()) {
+				int id=resultSet.getInt("contact_id");
 				String firstName=resultSet.getString("first_name");
 				String lastName=resultSet.getString("last_name");
 				long phoneNumber=resultSet.getLong("phone_number");
@@ -36,7 +37,7 @@ public class AddressBookDBService {
 				String city=resultSet.getString("city");
 				String state=resultSet.getString("state");
 				int zipCode=resultSet.getInt("zipCode");
-				contactList.add(new Contact(firstName,lastName,new Address(address,city,state,zipCode),phoneNumber,email)); 		
+				contactList.add(new Contact(id,firstName,lastName,new Address(id,address,city,state,zipCode),phoneNumber,email)); 		
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -44,8 +45,8 @@ public class AddressBookDBService {
 		return contactList;
 	}
 	
-	public List<Contact> readData(String name) throws SQLException{
-		String sql = String.format("select c.first_name, c.last_name, c.phone_number, c.email, a.address, a.city,a.state, a.zipCode"
+	public List<Contact> readFromDB(String name) throws SQLException{
+		String sql = String.format("select c.contact_id, c.first_name, c.last_name, c.phone_number, c.email, a.address, a.city,a.state, a.zipCode"
 				+ " from contact c, address	 a, addressbook ab, contact_type t"
 				+ " where c.contact_id=t.contact_id and ab.addressbook_id=t.addressbook_id and c.contact_id=a.contact_id"
 				+ " and ab.addressbook_name='%s';",name);

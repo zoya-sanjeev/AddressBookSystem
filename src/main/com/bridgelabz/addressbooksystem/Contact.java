@@ -49,6 +49,14 @@ public class Contact {
 		this.phoneNumber=phoneNumber;
 		this.emailId=emailId;
 	}
+	public Contact(int id,String firstName,String lastName,Address address,long phoneNumber,String emailId) {
+		this.contactId=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.contactAddress=address;
+		this.phoneNumber=phoneNumber;
+		this.emailId=emailId;
+	}
 	
 	public String getFirstName() {
 		return firstName;
