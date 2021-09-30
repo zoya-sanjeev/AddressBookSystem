@@ -63,8 +63,7 @@ public class AddressBook implements AddressBookIF{
 			new AddressBookIO().readFromCsv(name);
 		}else if(ioService==IOService.JSON_IO) {
 			new AddressBookIO().readFromJson(name);
-		}else if(ioService == IOService.DB_IO);
-			List<Contact> contactList=new AddressBookIO().readFromDB(name);
+		}
 	}
 	
 	@Override
