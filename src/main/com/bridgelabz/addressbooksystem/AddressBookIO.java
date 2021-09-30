@@ -23,6 +23,8 @@ import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import main.com.bridgelabz.addressbooksystem.AddressBook.IOService;
+
 public class AddressBookIO {
 	
 	public void writeDataToFile(List<Contact> addressBook, String name) {
@@ -104,6 +106,11 @@ public class AddressBookIO {
 		List<Contact> addressbook=Arrays.asList(contactsFile);
 		System.out.println(addressbook);
 		return addressbook;
+	}
+
+	public List<Contact> readFromDB(IOService service) {
+		if(service==IOService.DB_IO) 
+			return new AddressBookDBService().readFromDB();
 	}
 
 }
