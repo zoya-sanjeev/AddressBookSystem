@@ -110,6 +110,22 @@ public class AddressBookDBService {
 		return listOfContacts;
 	}
 
+	public List<Contact> getContactBasedOnCity(String city) {
+		List<Contact> listOfContacts=new ArrayList<Contact>();
+		String sql= String.format("select c.contact_id, c.first_name, c.last_name, c.phone_number, c.email, a.address, a.city,a.state, a.zipCode"
+								+ " from contact c, address	 a "
+							+   " where c.contact_id=a.contact_id and a.city='%s';", city);
+		try(Connection connection =this.getConnection()) {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			listOfContacts= this.getcontactData(result);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return listOfContacts;
+		
+	}
+
 	
 
 }

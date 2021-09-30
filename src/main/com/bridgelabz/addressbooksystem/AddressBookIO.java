@@ -149,6 +149,13 @@ public class AddressBookIO {
 		return null;
 	}
 
+	public int getContactBasedOnCity(String city, IOService service) {
+		List<Contact> contacts=new ArrayList<>();
+		if(service==IOService.DB_IO)
+			contacts=new AddressBookDBService().getContactBasedOnCity(city);
+		return contacts.size();
+	}
+
 	
 	
 
