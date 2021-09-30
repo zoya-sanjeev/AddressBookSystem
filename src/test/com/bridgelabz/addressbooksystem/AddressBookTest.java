@@ -70,5 +70,16 @@ public class AddressBookTest {
 		List<Contact> contactList=new AddressBookIO().readFromDB(IOService.DB_IO);
 		Assert.assertEquals(4, contactList.size());	
 	}
+	
+	@Test
+	public void givenContactFirstName_whenUpdatedEmail_shouldSyncWithDB() throws SQLException{
+		String firstName="zoya";
+		String newEmail="zoya29@gmail.com";
+		AddressBookIO addressBookIO=new AddressBookIO();
+		addressBookIO.updateContactEmail(firstName,newEmail, IOService.DB_IO);
+		boolean result=addressBookIO.checkContactInSyncWithDB("zoya");
+		Assert.assertTrue(result);
+		
+	}
 
 }
