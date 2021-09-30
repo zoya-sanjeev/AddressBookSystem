@@ -120,5 +120,13 @@ public class Contact {
                 ", email='" + emailId + '\'' +
                 '}';
     }
+	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(this == null || getClass() != o.getClass()) return false;
+		Contact that =	(Contact) o;
+		return contactId==that.contactId && firstName.equals(that.getFirstName()) && lastName.equals(that.getLastName());
+	}
 
 }
