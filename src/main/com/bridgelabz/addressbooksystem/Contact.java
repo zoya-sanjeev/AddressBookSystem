@@ -1,6 +1,9 @@
 package main.com.bridgelabz.addressbooksystem;
 
+import java.time.LocalDate;
+
 import com.opencsv.bean.CsvBindByName;
+
 
 public class Contact {
 	
@@ -24,7 +27,15 @@ public class Contact {
 	public int id;
 	Address contactAddress;
 	
+<<<<<<< HEAD
 	public Contact(String firstName,String lastName,String address,String city,String state,int zipCode,long phoneNumber,String emailId){
+=======
+	public int contactId;
+	Address contactAddress;
+	public LocalDate dateAdded;
+	
+	public Contact(String firstName,String lastName,String address,String city,String state,int zipCode,int phoneNumber,String emailId){
+>>>>>>> address_book_system_uc20
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.address=address;
@@ -43,13 +54,45 @@ public class Contact {
 		this.emailId=emailId;
 	}
 	public Contact(int id,String firstName,String lastName,long phoneNumber,String emailId) {
+<<<<<<< HEAD
 		this.id=id;
+=======
+		this.contactId=id;
+>>>>>>> address_book_system_uc20
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.phoneNumber=phoneNumber;
 		this.emailId=emailId;
 	}
+<<<<<<< HEAD
 	
+=======
+	public Contact(int id,String firstName,String lastName,Address address,long phoneNumber,String emailId) {
+		this.contactId=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.contactAddress=address;
+		this.phoneNumber=phoneNumber;
+		this.emailId=emailId;
+	}
+	public Contact(int id,String firstName,String lastName,Address address,long phoneNumber,String emailId, LocalDate date) {
+		this.contactId=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.contactAddress=address;
+		this.phoneNumber=phoneNumber;
+		this.emailId=emailId;
+		this.dateAdded=date;
+	}
+	public Contact(int id,String firstName,String lastName,long phoneNumber,String emailId, LocalDate date) {
+		this.contactId=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.phoneNumber=phoneNumber;
+		this.emailId=emailId;
+		this.dateAdded=date;
+	}
+>>>>>>> address_book_system_uc20
 	
 	public String getFirstName() {
 		return firstName;
@@ -113,5 +156,14 @@ public class Contact {
                 ", email='" + emailId + '\'' +
                 '}';
     }
+	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(this == null || getClass() != o.getClass()) return false;
+		Contact that =	(Contact) o;
+		return contactId==that.contactId && firstName.equals(that.getFirstName()) && lastName.equals(that.getLastName())
+				&& emailId.equals(that.getEmailId());
+	}
 
 }

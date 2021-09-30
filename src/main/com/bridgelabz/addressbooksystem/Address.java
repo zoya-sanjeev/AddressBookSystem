@@ -1,13 +1,31 @@
 package main.com.bridgelabz.addressbooksystem;
 
 public class Address {
+
 	
 	public int contactId;
-	public int AddressId;
 	public String address;
 	public String city;
 	public String state;
 	public long zipCode;
+
+	
+	public Address(int contactId,String address,String city, String state, int zipCode) {
+		this.contactId=contactId;
+		this.address=address;
+		this.city=city;
+		this.state=state;
+		this.zipCode=zipCode;
+	}
+	
+	public int getContactId() {
+		return contactId;
+	}
+
+	public void setContactId(int contactId) {
+		this.contactId = contactId;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -26,6 +44,7 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
+
 	public long getZipCode() {
 		return zipCode;
 	}
@@ -39,5 +58,10 @@ public class Address {
 		this.state=state;
 		this.zipCode=zipCode;
 	}
+
+	
+	
+	
+
 
 }

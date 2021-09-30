@@ -12,6 +12,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+<<<<<<< HEAD
+=======
+import java.time.LocalDate;
+>>>>>>> address_book_system_uc20
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +31,7 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import main.com.bridgelabz.addressbooksystem.AddressBook.IOService;
 
 public class AddressBookIO {
+	List<Contact> listOfContacts;
 	
 	public void writeDataToFile(List<Contact> addressBook, String name) {
 		StringBuffer contactBuffer = new StringBuffer();
@@ -109,6 +114,7 @@ public class AddressBookIO {
 		return addressbook;
 	}
 
+<<<<<<< HEAD
 	public List<Contact> readFromDB(String name) throws SQLException {
 		List<Contact> contactList=new ArrayList<>();
 		contactList=new AddressBookDBService().readData(name);
@@ -142,4 +148,68 @@ public class AddressBookIO {
 		return 0;
 	}
 
+=======
+	private Contact getContact(String firstName) {
+		
+		return this.listOfContacts.stream().
+				filter(contact -> contact.getFirstName()
+				.equals(firstName))
+				.findFirst()
+				.orElse(null);
+		
+	}
+
+	public List<Contact> readFromDB(IOService service) throws SQLException {
+		if(service==IOService.DB_IO) 
+			return new AddressBookDBService().readFromDB();
+		return null;
+	}
+
+	public void updateContactEmail(String firstName, String newEmail, IOService service) {
+		int result=0;
+		if(service==IOService.DB_IO) {
+			result=new AddressBookDBService().updateContactEmail(firstName,newEmail);
+			if(result==0) return;
+			else {
+				this.listOfContacts=new ArrayList<>();
+				listOfContacts=new AddressBookDBService().getContactData(firstName);
+			}
+		}
+	}
+
+	public boolean checkContactInSyncWithDB(String firstName) {
+		List<Contact> contacts=new AddressBookDBService().getContactData(firstName);
+		return contacts.get(0).equals(getContact(firstName));
+	}
+
+	public List<Contact> getContactsOnGivenDateRange(IOService service, LocalDate startDate, LocalDate endDate) {
+		if(service==IOService.DB_IO)
+			return new AddressBookDBService().getContactsOnGivenDateRange(startDate,endDate);
+		return null;
+	}
+
+	public int getContactBasedOnCity(String city, IOService service) {
+		List<Contact> contacts=new ArrayList<>();
+		if(service==IOService.DB_IO)
+			contacts=new AddressBookDBService().getContactBasedOnCity(city);
+		return contacts.size();
+	}
+
+	public int getContactBasedOnState(String state, IOService service) {
+		List<Contact> contacts=new ArrayList<>();
+		if(service==IOService.DB_IO)
+			contacts=new AddressBookDBService().getContactBasedOnState(state);
+		return contacts.size();
+	}
+
+	public Contact addContactToDB(int id, String firstName, String lastName, Address address, long phoneNumber,
+			String emailId, LocalDate dateAdded) {
+		Contact contact=new AddressBookDBService().addContact(id,firstName,lastName,address,phoneNumber,emailId,dateAdded);
+		return contact;
+	}
+
+	
+	
+
+>>>>>>> address_book_system_uc20
 }
