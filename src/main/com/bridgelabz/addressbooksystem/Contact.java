@@ -126,7 +126,8 @@ public class Contact {
 		if(this == o) return true;
 		if(this == null || getClass() != o.getClass()) return false;
 		Contact that =	(Contact) o;
-		return contactId==that.contactId && firstName.equals(that.getFirstName()) && lastName.equals(that.getLastName());
+		return contactId==that.contactId && firstName.equals(that.getFirstName()) && lastName.equals(that.getLastName())
+				&& emailId.equals(that.getEmailId());
 	}
 
 }
