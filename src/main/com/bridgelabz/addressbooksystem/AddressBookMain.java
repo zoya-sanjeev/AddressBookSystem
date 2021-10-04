@@ -19,7 +19,7 @@ public class AddressBookMain {
 	}
 	
 	public static void getMenu() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException, SQLException {
-		AddressBookArray addressBookArray=new AddressBookArray();
+		AddressBookList addressBookArray=new AddressBookList();
 		
 		
 		while(true) {

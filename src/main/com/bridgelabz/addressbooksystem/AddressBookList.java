@@ -2,11 +2,11 @@ package main.com.bridgelabz.addressbooksystem;
 
 import java.util.*;
 
-public class AddressBookArray {
+public class AddressBookList {
 	
 	HashMap<String, AddressBook> addressBookArray;
 	
-	public AddressBookArray() {
+	public AddressBookList() {
 		this.addressBookArray=new HashMap<>();
 	}
 	
