@@ -10,9 +10,11 @@ import org.junit.Test;
 import main.com.bridgelabz.addressbooksystem.Address;
 import main.com.bridgelabz.addressbooksystem.AddressBookIO;
 import main.com.bridgelabz.addressbooksystem.Contact;
-import main.com.bridgelabz.addressbooksystem.AddressBook.IOService;
+import main.com.bridgelabz.addressbooksystem.IOService;
 
 public class AddressBookDBTest {
+	
+	IOService IOService;
 
 	@Test 
 	public void whenReadContactsFromDatabase_ShouldMatchContactCount() {
