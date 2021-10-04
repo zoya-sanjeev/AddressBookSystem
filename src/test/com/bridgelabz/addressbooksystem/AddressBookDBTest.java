@@ -77,7 +77,6 @@ public class AddressBookDBTest {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+			
 	}
 }
