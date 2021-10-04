@@ -32,11 +32,16 @@ public class AddressBook implements AddressBookIF{
 	public LinkedList<Contact> addressBook;
 	public static HashMap<String, ArrayList<String>> contactsInCities=new HashMap<>();
 	public static HashMap<String, ArrayList<String>> contactsInStates=new HashMap<>();
-	String name;
+	public String name;
+	public String addressBookType;
 
 	public AddressBook(String name){
 		this.addressBook=new LinkedList<>();
 		this.name=name;
+	}
+	public AddressBook(String name, String type) {
+		this.name=name;
+		this.addressBookType=type;
 	}
 	
 	public void writeData(String name, IOService ioService) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
