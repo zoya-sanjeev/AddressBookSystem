@@ -41,18 +41,10 @@ public class Contact {
 		this.phoneNumber=phoneNumber;
 		this.emailId=emailId;
 	}
-	
-	public Contact(String firstName,String lastName,Address address,long phoneNumber,String emailId) {
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.contactAddress=address;
-		this.phoneNumber=phoneNumber;
-		this.emailId=emailId;
-	}
+
 	public Contact(int id,String firstName,String lastName,long phoneNumber,String emailId) {
 
 		this.contactId=id;
-
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.phoneNumber=phoneNumber;
@@ -67,19 +59,12 @@ public class Contact {
 		this.phoneNumber=phoneNumber;
 		this.emailId=emailId;
 	}
+
 	public Contact(int id,String firstName,String lastName,Address address,long phoneNumber,String emailId, LocalDate date) {
 		this.contactId=id;
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.contactAddress=address;
-		this.phoneNumber=phoneNumber;
-		this.emailId=emailId;
-		this.dateAdded=date;
-	}
-	public Contact(int id,String firstName,String lastName,long phoneNumber,String emailId, LocalDate date) {
-		this.contactId=id;
-		this.firstName=firstName;
-		this.lastName=lastName;
 		this.phoneNumber=phoneNumber;
 		this.emailId=emailId;
 		this.dateAdded=date;
