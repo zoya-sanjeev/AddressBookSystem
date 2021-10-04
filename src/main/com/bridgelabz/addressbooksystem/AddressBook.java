@@ -33,13 +33,7 @@ public class AddressBook implements AddressBookIF{
 	public static HashMap<String, ArrayList<String>> contactsInCities=new HashMap<>();
 	public static HashMap<String, ArrayList<String>> contactsInStates=new HashMap<>();
 	String name;
-	public enum IOService{
-		FILE_IO,
-		CONSOLE_IO,
-		CSV_IO,
-		JSON_IO,
-		DB_IO
-	}
+
 	public AddressBook(String name){
 		this.addressBook=new LinkedList<>();
 		this.name=name;

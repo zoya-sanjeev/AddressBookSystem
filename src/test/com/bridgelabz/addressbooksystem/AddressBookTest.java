@@ -12,16 +12,15 @@ import org.junit.Test;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-
 import main.com.bridgelabz.addressbooksystem.Address;
 import main.com.bridgelabz.addressbooksystem.AddressBook;
-import main.com.bridgelabz.addressbooksystem.AddressBook.IOService;
 import main.com.bridgelabz.addressbooksystem.AddressBookIO;
 import main.com.bridgelabz.addressbooksystem.Contact;
 
 public class AddressBookTest {
 	static AddressBook addressBook;
 	static Contact newContact;
+	main.com.bridgelabz.addressbooksystem.IOService IOService;
 	
 	@BeforeClass
     public static void init() {
